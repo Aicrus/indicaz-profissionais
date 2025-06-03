@@ -2152,6 +2152,11 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                       _model.atividadeEscolhida =
                                                           null;
                                                       safeSetState(() {});
+                                                      safeSetState(() {
+                                                        _model
+                                                            .atividadePrincipalValueController
+                                                            ?.reset();
+                                                      });
                                                     },
                                                     text: 'Cancelar',
                                                     options: FFButtonOptions(

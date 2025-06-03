@@ -1,29 +1,11 @@
 import '/backend/supabase/supabase.dart';
 import '/componentes/atividade_secundaria/atividade_secundaria_widget.dart';
-import '/componentes/menu_itens/menu_itens_widget.dart';
-import '/flutter_flow/flutter_flow_drop_down.dart';
-import '/flutter_flow/flutter_flow_place_picker.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/flutter_flow/place.dart';
-import '/flutter_flow/upload_data.dart';
-import 'dart:io';
-import 'dart:ui';
-import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'perfil_empresa_widget.dart' show PerfilEmpresaWidget;
-import 'package:aligned_dialog/aligned_dialog.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:provider/provider.dart';
 
 class PerfilEmpresaModel extends FlutterFlowModel<PerfilEmpresaWidget> {
   ///  Local state fields for this page.
@@ -67,6 +49,10 @@ class PerfilEmpresaModel extends FlutterFlowModel<PerfilEmpresaWidget> {
   FormFieldController<int>? atividadePrincipalValueController;
   // Model for AtividadeSecundaria component.
   late AtividadeSecundariaModel atividadeSecundariaModel1;
+  // Stores action output result for [Backend Call - Query Rows] action in ButtonLogin widget.
+  List<CompanyRow>? companyAtualizada;
+  // Stores action output result for [Backend Call - Query Rows] action in ButtonLogin widget.
+  List<ActivityRow>? atividadeCompany;
   // State field(s) for TextFieldTelefone widget.
   FocusNode? textFieldTelefoneFocusNode1;
   TextEditingController? textFieldTelefoneTextController1;

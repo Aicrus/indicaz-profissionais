@@ -7,22 +7,16 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/flutter_flow/place.dart';
 import '/flutter_flow/upload_data.dart';
-import 'dart:io';
-import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:provider/provider.dart';
 import 'perfil_empresa_model.dart';
 export 'perfil_empresa_model.dart';
 
@@ -49,63 +43,64 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
   late PerfilEmpresaModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  
-  // Adicionar variável local para manter os dados atualizados da empresa
-  late CompanyRow _currentCompany;
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => PerfilEmpresaModel());
-    
-    // Inicializar a empresa local
-    _currentCompany = widget.company!;
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (widget!.categoria == 3) {
+      if (widget.categoria == 3) {
         _model.categorias = 3;
         safeSetState(() {});
       }
     });
 
     _model.textFieldEmpresaTextController ??=
-        TextEditingController(text: _currentCompany.name);
+        TextEditingController(text: widget.company?.name);
     _model.textFieldEmpresaFocusNode ??= FocusNode();
 
     _model.textFieldApresentacaoTextController ??=
-        TextEditingController(text: _currentCompany.presentation);
+        TextEditingController(text: widget.company?.presentation);
     _model.textFieldApresentacaoFocusNode ??= FocusNode();
 
-    // Inicializar todos os campos de telefone com o número da empresa
-    _model.textFieldTelefoneTextController1 ??= TextEditingController(text: _currentCompany.phone);
+    _model.textFieldTelefoneTextController1 ??= TextEditingController(
+        text: functions.removeMais55(valueOrDefault<String>(
+      widget.company?.phone,
+      '-',
+    )));
     _model.textFieldTelefoneFocusNode1 ??= FocusNode();
 
-    _model.textFieldTelefoneTextController2 ??= TextEditingController(text: _currentCompany.phone);
+    _model.textFieldTelefoneTextController2 ??= TextEditingController(
+        text: functions.removeMais55(valueOrDefault<String>(
+      widget.company?.phone,
+      '-',
+    )));
     _model.textFieldTelefoneFocusNode2 ??= FocusNode();
 
-    _model.textFieldTelefoneTextController3 ??= TextEditingController(text: _currentCompany.phone);
+    _model.textFieldTelefoneTextController3 ??= TextEditingController();
     _model.textFieldTelefoneFocusNode3 ??= FocusNode();
 
-    _model.textFieldTelefoneTextController4 ??= TextEditingController(text: _currentCompany.phone);
+    _model.textFieldTelefoneTextController4 ??= TextEditingController();
     _model.textFieldTelefoneFocusNode4 ??= FocusNode();
 
-    _model.textFieldTelefoneTextController5 ??= TextEditingController(text: _currentCompany.phone);
+    _model.textFieldTelefoneTextController5 ??= TextEditingController();
     _model.textFieldTelefoneFocusNode5 ??= FocusNode();
 
-    _model.textFieldTelefoneTextController6 ??= TextEditingController(text: _currentCompany.phone);
+    _model.textFieldTelefoneTextController6 ??= TextEditingController();
     _model.textFieldTelefoneFocusNode6 ??= FocusNode();
 
-    _model.textFieldTelefoneTextController7 ??= TextEditingController(text: _currentCompany.phone);
+    _model.textFieldTelefoneTextController7 ??= TextEditingController();
     _model.textFieldTelefoneFocusNode7 ??= FocusNode();
 
-    _model.textFieldTelefoneTextController8 ??= TextEditingController(text: _currentCompany.phone);
+    _model.textFieldTelefoneTextController8 ??= TextEditingController();
     _model.textFieldTelefoneFocusNode8 ??= FocusNode();
 
-    _model.textFieldTelefoneTextController9 ??= TextEditingController(text: _currentCompany.phone);
+    _model.textFieldTelefoneTextController9 ??= TextEditingController();
     _model.textFieldTelefoneFocusNode9 ??= FocusNode();
 
-    _model.textFieldTelefoneTextController10 ??= TextEditingController(text: _currentCompany.phone);
+    _model.textFieldTelefoneTextController10 ??= TextEditingController();
     _model.textFieldTelefoneFocusNode10 ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -256,6 +251,16 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                         decoration: BoxDecoration(
                           color:
                               FlutterFlowTheme.of(context).borderColorPrimary,
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 4.0,
+                              color: Color(0x33000000),
+                              offset: Offset(
+                                0.0,
+                                2.0,
+                              ),
+                            )
+                          ],
                         ),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
@@ -277,13 +282,11 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                             fit: BoxFit.cover,
                                             image: CachedNetworkImageProvider(
                                               _model.uploadedFileUrl_uploadData1 !=
-                                                          null &&
-                                                      _model.uploadedFileUrl_uploadData1 !=
                                                           ''
                                                   ? _model
                                                       .uploadedFileUrl_uploadData1
                                                   : valueOrDefault<String>(
-                                                      widget!
+                                                      widget
                                                           .company?.imageCover,
                                                       'https://i0.wp.com/espaferro.com.br/wp-content/uploads/2024/06/placeholder.png?ssl=1',
                                                     ),
@@ -377,7 +380,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                               matchingRows: (rows) =>
                                                   rows.eqOrNull(
                                                 'id',
-                                                widget!.company?.id,
+                                                widget.company?.id,
                                               ),
                                             );
                                           },
@@ -457,12 +460,10 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                             valueOrDefault<
                                                                 String>(
                                                               _model.uploadedFileUrl_uploadDataTv7 !=
-                                                                          null &&
-                                                                      _model.uploadedFileUrl_uploadDataTv7 !=
                                                                           ''
                                                                   ? _model
                                                                       .uploadedFileUrl_uploadDataTv7
-                                                                  : widget!
+                                                                  : widget
                                                                       .company
                                                                       ?.photo,
                                                               'https://s3.eu-central-1.amazonaws.com/uploads.mangoweb.org/shared-prod/visegradfund.org/uploads/2021/08/placeholder-male.jpg',
@@ -573,7 +574,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                               (rows) =>
                                                                   rows.eqOrNull(
                                                             'id',
-                                                            widget!.company?.id,
+                                                            widget.company?.id,
                                                           ),
                                                         );
                                                       },
@@ -681,34 +682,76 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              Text(
-                                                valueOrDefault<String>(
-                                                  widget!.company?.name,
-                                                  'Nome Empresa',
+                                              FutureBuilder<List<CompanyRow>>(
+                                                future: CompanyTable()
+                                                    .querySingleRow(
+                                                  queryFn: (q) => q.eqOrNull(
+                                                    'id',
+                                                    widget.company?.id,
+                                                  ),
                                                 ),
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      font: GoogleFonts.poppins(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontStyle:
+                                                builder: (context, snapshot) {
+                                                  // Customize what your widget looks like when it's loading.
+                                                  if (!snapshot.hasData) {
+                                                    return Center(
+                                                      child: SizedBox(
+                                                        width: 50.0,
+                                                        height: 50.0,
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          valueColor:
+                                                              AlwaysStoppedAnimation<
+                                                                  Color>(
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyMedium
-                                                                .fontStyle,
+                                                                .primary,
+                                                          ),
+                                                        ),
                                                       ),
-                                                      fontSize: 18.0,
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .fontStyle,
+                                                    );
+                                                  }
+                                                  List<CompanyRow>
+                                                      textCompanyRowList =
+                                                      snapshot.data!;
+
+                                                  final textCompanyRow =
+                                                      textCompanyRowList
+                                                              .isNotEmpty
+                                                          ? textCompanyRowList
+                                                              .first
+                                                          : null;
+
+                                                  return Text(
+                                                    valueOrDefault<String>(
+                                                      textCompanyRow?.name,
+                                                      'Nome',
                                                     ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .poppins(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          fontSize: 18.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                  );
+                                                },
                                               ),
                                               Expanded(
                                                 child: Row(
@@ -1109,13 +1152,9 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                               (rows) =>
                                                                   rows.eqOrNull(
                                                             'id',
-                                                            widget!.company?.id,
+                                                            widget.company?.id,
                                                           ),
                                                         );
-                                                        
-                                                        // Atualizar a empresa local para refletir a mudança imediatamente
-                                                        _currentCompany.name = _model.textFieldEmpresaTextController.text;
-                                                        
                                                         _model.categorias = 0;
                                                         safeSetState(() {});
 
@@ -1540,13 +1579,9 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                         matchingRows: (rows) =>
                                                             rows.eqOrNull(
                                                           'id',
-                                                          widget!.company?.id,
+                                                          widget.company?.id,
                                                         ),
                                                       );
-                                                      
-                                                      // Atualizar a empresa local para refletir a mudança imediatamente
-                                                      _currentCompany.presentation = _model.textFieldApresentacaoTextController.text;
-                                                      
                                                       _model.categorias = 0;
                                                       safeSetState(() {});
                                                     },
@@ -1618,36 +1653,78 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 15.0),
-                                        child: Text(
-                                          valueOrDefault<String>(
-                                            _currentCompany.presentation,
-                                            'Fale um pouco sobre sua empresa ou serviço.',
+                                        child: FutureBuilder<List<CompanyRow>>(
+                                          future: CompanyTable().querySingleRow(
+                                            queryFn: (q) => q.eqOrNull(
+                                              'id',
+                                              widget.company?.id,
+                                            ),
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                font: GoogleFonts.poppins(
-                                                  fontWeight:
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<
+                                                            Color>(
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyMedium
-                                                          .fontWeight,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontStyle,
+                                                          .primary,
+                                                    ),
+                                                  ),
                                                 ),
-                                                letterSpacing: 0.0,
-                                                fontWeight:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontWeight,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontStyle,
+                                              );
+                                            }
+                                            List<CompanyRow>
+                                                textCompanyRowList =
+                                                snapshot.data!;
+
+                                            final textCompanyRow =
+                                                textCompanyRowList.isNotEmpty
+                                                    ? textCompanyRowList.first
+                                                    : null;
+
+                                            return Text(
+                                              valueOrDefault<String>(
+                                                textCompanyRow?.presentation,
+                                                'Fale um pouco sobre sua empresa ou serviço.',
                                               ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        font:
+                                                            GoogleFonts.poppins(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                            );
+                                          },
                                         ),
                                       ),
                                   ],
@@ -1793,7 +1870,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                 controller: _model
                                                         .atividadePrincipalValueController ??=
                                                     FormFieldController<int>(
-                                                        widget!.company!.mainActivity),
+                                                        null),
                                                 options: List<int>.from(
                                                     atividadePrincipalActivityRowList
                                                         .map((e) => e.id)
@@ -1893,8 +1970,8 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                     ),
                                                 hintText:
                                                     valueOrDefault<String>(
-                                                  widget!.atividade != null
-                                                      ? widget!.atividade?.name
+                                                  widget.atividade != null
+                                                      ? widget.atividade?.name
                                                       : 'Atividades',
                                                   'Atividades',
                                                 ),
@@ -1956,7 +2033,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                         queryParameters: {
                                                           'company':
                                                               serializeParam(
-                                                            widget!.company,
+                                                            widget.company,
                                                             ParamType
                                                                 .SupabaseRow,
                                                           ),
@@ -1967,7 +2044,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                           ),
                                                           'atividade':
                                                               serializeParam(
-                                                            widget!.atividade,
+                                                            widget.atividade,
                                                             ParamType
                                                                 .SupabaseRow,
                                                           ),
@@ -2164,6 +2241,44 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                   child: FFButtonWidget(
                                                     onPressed: () async {
                                                       _model.categorias = 0;
+                                                      _model.atividadeEscolhida =
+                                                          null;
+                                                      safeSetState(() {});
+                                                      _model.companyAtualizada =
+                                                          await CompanyTable()
+                                                              .queryRows(
+                                                        queryFn: (q) =>
+                                                            q.eqOrNull(
+                                                          'id',
+                                                          widget.company?.id,
+                                                        ),
+                                                      );
+                                                      _model.atividadeCompany =
+                                                          await ActivityTable()
+                                                              .queryRows(
+                                                        queryFn: (q) =>
+                                                            q.eqOrNull(
+                                                          'id',
+                                                          _model
+                                                              .companyAtualizada
+                                                              ?.firstOrNull
+                                                              ?.mainActivity,
+                                                        ),
+                                                      );
+                                                      safeSetState(() {
+                                                        _model
+                                                            .atividadePrincipalValueController
+                                                            ?.reset();
+                                                      });
+                                                      safeSetState(() {
+                                                        _model.atividadePrincipalValueController
+                                                                ?.value =
+                                                            _model
+                                                                .atividadeCompany!
+                                                                .firstOrNull!
+                                                                .id;
+                                                      });
+
                                                       safeSetState(() {});
                                                     },
                                                     text: 'Cancelar',
@@ -2242,7 +2357,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                         matchingRows: (rows) =>
                                                             rows.eqOrNull(
                                                           'id',
-                                                          widget!.company?.id,
+                                                          widget.company?.id,
                                                         ),
                                                       );
                                                       _model.categorias = 0;
@@ -2319,67 +2434,144 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 25.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Icon(
-                                              Icons.check,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .tertiary,
-                                              size: 24.0,
+                                        child: FutureBuilder<List<CompanyRow>>(
+                                          future: CompanyTable().querySingleRow(
+                                            queryFn: (q) => q.eqOrNull(
+                                              'id',
+                                              widget.company?.id,
                                             ),
-                                            FutureBuilder<List<ActivityRow>>(
-                                              future: ActivityTable()
-                                                  .querySingleRow(
-                                                queryFn: (q) => q.eqOrNull(
-                                                  'id',
-                                                  widget!.company!.mainActivity,
-                                                ),
-                                              ),
-                                              builder: (context, snapshot) {
-                                                // Customize what your widget looks like when it's loading.
-                                                if (!snapshot.hasData) {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      width: 50.0,
-                                                      height: 50.0,
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        valueColor:
-                                                            AlwaysStoppedAnimation<
-                                                                Color>(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                        ),
-                                                      ),
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<
+                                                            Color>(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primary,
                                                     ),
-                                                  );
-                                                }
-                                                List<ActivityRow>
-                                                    richTextActivityRowList =
-                                                    snapshot.data!;
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<CompanyRow> rowCompanyRowList =
+                                                snapshot.data!;
 
-                                                final richTextActivityRow =
-                                                    richTextActivityRowList
-                                                            .isNotEmpty
-                                                        ? richTextActivityRowList
-                                                            .first
-                                                        : null;
+                                            final rowCompanyRow =
+                                                rowCompanyRowList.isNotEmpty
+                                                    ? rowCompanyRowList.first
+                                                    : null;
 
-                                                return RichText(
-                                                  textScaler:
-                                                      MediaQuery.of(context)
-                                                          .textScaler,
-                                                  text: TextSpan(
-                                                    children: [
-                                                      TextSpan(
-                                                        text: valueOrDefault<
-                                                            String>(
-                                                          richTextActivityRow?.name,
-                                                          'Pintor',
+                                            return Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Icon(
+                                                  Icons.check,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .tertiary,
+                                                  size: 24.0,
+                                                ),
+                                                FutureBuilder<
+                                                    List<ActivityRow>>(
+                                                  future: ActivityTable()
+                                                      .querySingleRow(
+                                                    queryFn: (q) => q.eqOrNull(
+                                                      'id',
+                                                      rowCompanyRow
+                                                          ?.mainActivity,
+                                                    ),
+                                                  ),
+                                                  builder: (context, snapshot) {
+                                                    // Customize what your widget looks like when it's loading.
+                                                    if (!snapshot.hasData) {
+                                                      return Center(
+                                                        child: SizedBox(
+                                                          width: 50.0,
+                                                          height: 50.0,
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                            valueColor:
+                                                                AlwaysStoppedAnimation<
+                                                                    Color>(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primary,
+                                                            ),
+                                                          ),
                                                         ),
+                                                      );
+                                                    }
+                                                    List<ActivityRow>
+                                                        richTextActivityRowList =
+                                                        snapshot.data!;
+
+                                                    // Return an empty Container when the item does not exist.
+                                                    if (snapshot
+                                                        .data!.isEmpty) {
+                                                      return Container();
+                                                    }
+                                                    final richTextActivityRow =
+                                                        richTextActivityRowList
+                                                                .isNotEmpty
+                                                            ? richTextActivityRowList
+                                                                .first
+                                                            : null;
+
+                                                    return RichText(
+                                                      textScaler:
+                                                          MediaQuery.of(context)
+                                                              .textScaler,
+                                                      text: TextSpan(
+                                                        children: [
+                                                          TextSpan(
+                                                            text:
+                                                                valueOrDefault<
+                                                                    String>(
+                                                              richTextActivityRow
+                                                                  ?.name,
+                                                              'name',
+                                                            ),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .poppins(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  fontSize:
+                                                                      15.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                          ),
+                                                          TextSpan(
+                                                            text:
+                                                                ' (Principal) ',
+                                                            style: TextStyle(),
+                                                          )
+                                                        ],
                                                         style: FlutterFlowTheme
                                                                 .of(context)
                                                             .bodyMedium
@@ -2407,41 +2599,12 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                                       .fontStyle,
                                                             ),
                                                       ),
-                                                      TextSpan(
-                                                        text: ' (Principal) ',
-                                                        style: TextStyle(),
-                                                      )
-                                                    ],
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          font: GoogleFonts
-                                                              .poppins(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontStyle,
-                                                          ),
-                                                          fontSize: 15.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                          ].divide(SizedBox(width: 10.0)),
+                                                    );
+                                                  },
+                                                ),
+                                              ].divide(SizedBox(width: 10.0)),
+                                            );
+                                          },
                                         ),
                                       ),
                                   ],
@@ -2459,6 +2622,16 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                           decoration: BoxDecoration(
                             color:
                                 FlutterFlowTheme.of(context).borderColorPrimary,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 4.0,
+                                color: Color(0x33000000),
+                                offset: Offset(
+                                  0.0,
+                                  2.0,
+                                ),
+                              )
+                            ],
                           ),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
@@ -2537,7 +2710,12 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                       ),
                                                     ),
                                                     Text(
-                                                      '(11) 98765-4567',
+                                                      functions.removeMais55(
+                                                          valueOrDefault<
+                                                              String>(
+                                                        widget.company?.phone,
+                                                        '-',
+                                                      )),
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -2597,7 +2775,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                 onTap: () async {
                                                   _model.categorias = 4;
                                                   _model.editar = true;
-          safeSetState(() {});
+                                                  safeSetState(() {});
                                                 },
                                                 child: Icon(
                                                   Icons.edit_outlined,
@@ -3012,7 +3190,8 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                                         .fontStyle,
                                                                   ),
                                                           elevation: 0.0,
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .secondaryBackground,
@@ -3057,7 +3236,11 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                 ),
                                               ),
                                               Text(
-                                                '(11) 98765-4567',
+                                                functions.removeMais55(
+                                                    valueOrDefault<String>(
+                                                  widget.company?.phone,
+                                                  '-',
+                                                )),
                                                 style: FlutterFlowTheme.of(
                                                         context)
                                                     .bodyMedium
@@ -3537,7 +3720,8 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                                         .fontStyle,
                                                                   ),
                                                           elevation: 0.0,
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .secondaryBackground,
@@ -3774,7 +3958,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                               ),
                                                       enabledBorder:
                                                           OutlineInputBorder(
-                                                          borderSide: BorderSide(
+                                                        borderSide: BorderSide(
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primaryText,
@@ -3940,7 +4124,8 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                                         .fontStyle,
                                                                   ),
                                                           elevation: 0.0,
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .secondaryBackground,
@@ -4012,7 +4197,8 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                                         .fontStyle,
                                                                   ),
                                                           elevation: 0.0,
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .secondaryBackground,
@@ -4475,7 +4661,8 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                                         .fontStyle,
                                                                   ),
                                                           elevation: 0.0,
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .secondaryBackground,
@@ -6250,8 +6437,8 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Padding(
-                                          padding: EdgeInsetsDirectional
-                                              .fromSTEB(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 10.0, 0.0),
                                           child: FaIcon(
                                             FontAwesomeIcons.twitter,
@@ -7252,11 +7439,10 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                                 children: [
                                                                   Expanded(
                                                                     child: Text(
-                                                                      functions.validarEndereco(_model.placePickerValue.address != null &&
-                                                                              _model.placePickerValue.address !=
+                                                                      functions.validarEndereco(_model.placePickerValue.address !=
                                                                                   ''
-                                                                          ? '${_model.placePickerValue.address}${_model.placePickerValue.latLng?.toString()}'
-                                                                          : widget!
+                                                                          ? '${_model.placePickerValue.address}${_model.placePickerValue.latLng.toString()}'
+                                                                          : widget
                                                                               .company!
                                                                               .address!),
                                                                       style: FlutterFlowTheme.of(
@@ -7268,7 +7454,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                                               fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
                                                                               fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                             ),
-                                                                            color: functions.validarEndereco('${_model.placePickerValue.address}${_model.placePickerValue.latLng?.toString()}') == 'Endereço incompleto. Por favor, selecione um endereço válido contendo: Rua, número, bairro, cidade, estado.'
+                                                                            color: functions.validarEndereco('${_model.placePickerValue.address}${_model.placePickerValue.latLng.toString()}') == 'Endereço incompleto. Por favor, selecione um endereço válido contendo: Rua, número, bairro, cidade, estado.'
                                                                                 ? FlutterFlowTheme.of(context).error
                                                                                 : FlutterFlowTheme.of(context).primaryText,
                                                                             letterSpacing:
@@ -7562,9 +7748,6 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                       child: FFButtonWidget(
                                                         onPressed: () async {
                                                           _model.categorias = 0;
-                                                          _model.atividadeEscolhida = null;
-                                                          // Resetar o dropdown para a atividade atual da company
-                                                          _model.atividadePrincipalValueController?.value = widget!.company!.mainActivity;
                                                           safeSetState(() {});
                                                         },
                                                         text: 'Cancelar',
@@ -7620,7 +7803,8 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                                         .fontStyle,
                                                                   ),
                                                           elevation: 0.0,
-                                                          borderSide: BorderSide(
+                                                          borderSide:
+                                                              BorderSide(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .secondaryBackground,
@@ -7638,15 +7822,11 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                         onPressed: () async {
                                                           var _shouldSetState =
                                                               false;
-                                                          if (functions.validarEndereco(_model
-                                                                              .placePickerValue
-                                                                              .address !=
-                                                                          null &&
-                                                                      _model.placePickerValue
+                                                          if (functions.validarEndereco(_model.placePickerValue
                                                                               .address !=
                                                                           ''
-                                                                  ? '${_model.placePickerValue.address}${_model.placePickerValue.latLng?.toString()}'
-                                                                  : widget!
+                                                                  ? '${_model.placePickerValue.address}${_model.placePickerValue.latLng.toString()}'
+                                                                  : widget
                                                                       .company!
                                                                       .address!) ==
                                                               'Selecione um endereço.') {
@@ -7654,15 +7834,11 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                               safeSetState(
                                                                   () {});
                                                             return;
-                                                          } else if (functions.validarEndereco(_model
-                                                                              .placePickerValue
-                                                                              .address !=
-                                                                          null &&
-                                                                      _model.placePickerValue
+                                                          } else if (functions.validarEndereco(_model.placePickerValue
                                                                               .address !=
                                                                           ''
-                                                                  ? '${_model.placePickerValue.address}${_model.placePickerValue.latLng?.toString()}'
-                                                                  : widget!
+                                                                  ? '${_model.placePickerValue.address}${_model.placePickerValue.latLng.toString()}'
+                                                                  : widget
                                                                       .company!
                                                                       .address!) ==
                                                               'Endereço incompleto. Por favor, selecione um endereço válido contendo: Rua, número, bairro, cidade, estado.') {
@@ -7676,13 +7852,13 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                               .update(
                                                             data: {
                                                               'address':
-                                                                  '${_model.placePickerValue.address}${_model.placePickerValue.latLng?.toString()}',
+                                                                  '${_model.placePickerValue.address}${_model.placePickerValue.latLng.toString()}',
                                                             },
                                                             matchingRows:
                                                                 (rows) => rows
                                                                     .eqOrNull(
                                                               'id',
-                                                              widget!
+                                                              widget
                                                                   .company?.id,
                                                             ),
                                                           );
@@ -7785,7 +7961,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                       .querySingleRow(
                                                     queryFn: (q) => q.eqOrNull(
                                                       'id',
-                                                      widget!.company?.id,
+                                                      widget.company?.id,
                                                     ),
                                                   ),
                                                   builder: (context, snapshot) {

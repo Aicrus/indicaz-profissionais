@@ -1130,7 +1130,9 @@ class _DadosEmpresaWidgetState extends State<DadosEmpresaWidget> {
                                                             widget!.phone,
                                                         'main_activity': _model
                                                             .atividadePrincipalValue,
-                                                        'photo': _model.img,
+                                                        'photo': widget!.img != null && widget!.img != '' 
+                                                            ? widget!.img 
+                                                            : _model.img,
                                                         'activated': true,
                                                         'user_profissional':
                                                             widget!.idUser,
@@ -1183,14 +1185,8 @@ class _DadosEmpresaWidgetState extends State<DadosEmpresaWidget> {
                                                                   ?.mainActivity
                                                               : _model
                                                                   .atividadePrincipalValue,
-                                                          'photo': _model
-                                                                          .uploadedFileUrl_uploadDataRy7 ==
-                                                                      null ||
-                                                                  _model.uploadedFileUrl_uploadDataRy7 ==
-                                                                      ''
-                                                              ? widget!
-                                                                  .company
-                                                                  ?.photo
+                                                          'photo': widget!.img != null && widget!.img != '' 
+                                                              ? widget!.img 
                                                               : _model.img,
                                                           'user_profissional':
                                                               widget!.idUser,

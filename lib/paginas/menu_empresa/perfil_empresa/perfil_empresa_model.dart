@@ -38,6 +38,9 @@ class PerfilEmpresaModel extends FlutterFlowModel<PerfilEmpresaWidget> {
 
   int? atividadeEscolhida;
 
+  // Variável para forçar reconstrução do dropdown
+  int dropdownRebuildKey = 0;
+
   ///  State fields for stateful widgets in this page.
 
   bool isDataUploading_uploadData1 = false;

@@ -1790,6 +1790,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                   snapshot.data!;
 
                                               return FlutterFlowDropDown<int>(
+                                                key: Key('dropdown_atividade_${_model.dropdownRebuildKey}'),
                                                 controller: _model
                                                         .atividadePrincipalValueController ??=
                                                     FormFieldController<int>(
@@ -7563,9 +7564,8 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                         onPressed: () async {
                                                           _model.categorias = 0;
                                                           _model.atividadeEscolhida = null;
-                                                          // RECRIAR O DROPDOWN: Anular controller e valor para reconstrução completa
-                                                          _model.atividadePrincipalValueController = null;
-                                                          _model.atividadePrincipalValue = null;
+                                                          // Incrementar a key para forçar reconstrução do dropdown
+                                                          _model.dropdownRebuildKey++;
                                                           safeSetState(() {});
                                                         },
                                                         text: 'Cancelar',

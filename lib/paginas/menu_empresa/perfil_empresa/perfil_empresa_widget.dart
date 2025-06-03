@@ -49,11 +49,17 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
   late PerfilEmpresaModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  
+  // Adicionar variável local para manter os dados atualizados da empresa
+  late CompanyRow _currentCompany;
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => PerfilEmpresaModel());
+    
+    // Inicializar a empresa local
+    _currentCompany = widget.company!;
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -64,41 +70,42 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
     });
 
     _model.textFieldEmpresaTextController ??=
-        TextEditingController(text: widget!.company?.name);
+        TextEditingController(text: _currentCompany.name);
     _model.textFieldEmpresaFocusNode ??= FocusNode();
 
     _model.textFieldApresentacaoTextController ??=
-        TextEditingController(text: widget!.company?.presentation);
+        TextEditingController(text: _currentCompany.presentation);
     _model.textFieldApresentacaoFocusNode ??= FocusNode();
 
-    _model.textFieldTelefoneTextController1 ??= TextEditingController();
+    // Inicializar todos os campos de telefone com o número da empresa
+    _model.textFieldTelefoneTextController1 ??= TextEditingController(text: _currentCompany.phone);
     _model.textFieldTelefoneFocusNode1 ??= FocusNode();
 
-    _model.textFieldTelefoneTextController2 ??= TextEditingController();
+    _model.textFieldTelefoneTextController2 ??= TextEditingController(text: _currentCompany.phone);
     _model.textFieldTelefoneFocusNode2 ??= FocusNode();
 
-    _model.textFieldTelefoneTextController3 ??= TextEditingController();
+    _model.textFieldTelefoneTextController3 ??= TextEditingController(text: _currentCompany.phone);
     _model.textFieldTelefoneFocusNode3 ??= FocusNode();
 
-    _model.textFieldTelefoneTextController4 ??= TextEditingController();
+    _model.textFieldTelefoneTextController4 ??= TextEditingController(text: _currentCompany.phone);
     _model.textFieldTelefoneFocusNode4 ??= FocusNode();
 
-    _model.textFieldTelefoneTextController5 ??= TextEditingController();
+    _model.textFieldTelefoneTextController5 ??= TextEditingController(text: _currentCompany.phone);
     _model.textFieldTelefoneFocusNode5 ??= FocusNode();
 
-    _model.textFieldTelefoneTextController6 ??= TextEditingController();
+    _model.textFieldTelefoneTextController6 ??= TextEditingController(text: _currentCompany.phone);
     _model.textFieldTelefoneFocusNode6 ??= FocusNode();
 
-    _model.textFieldTelefoneTextController7 ??= TextEditingController();
+    _model.textFieldTelefoneTextController7 ??= TextEditingController(text: _currentCompany.phone);
     _model.textFieldTelefoneFocusNode7 ??= FocusNode();
 
-    _model.textFieldTelefoneTextController8 ??= TextEditingController();
+    _model.textFieldTelefoneTextController8 ??= TextEditingController(text: _currentCompany.phone);
     _model.textFieldTelefoneFocusNode8 ??= FocusNode();
 
-    _model.textFieldTelefoneTextController9 ??= TextEditingController();
+    _model.textFieldTelefoneTextController9 ??= TextEditingController(text: _currentCompany.phone);
     _model.textFieldTelefoneFocusNode9 ??= FocusNode();
 
-    _model.textFieldTelefoneTextController10 ??= TextEditingController();
+    _model.textFieldTelefoneTextController10 ??= TextEditingController(text: _currentCompany.phone);
     _model.textFieldTelefoneFocusNode10 ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -1105,6 +1112,10 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                             widget!.company?.id,
                                                           ),
                                                         );
+                                                        
+                                                        // Atualizar a empresa local para refletir a mudança imediatamente
+                                                        _currentCompany.name = _model.textFieldEmpresaTextController.text;
+                                                        
                                                         _model.categorias = 0;
                                                         safeSetState(() {});
 
@@ -1532,6 +1543,10 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                           widget!.company?.id,
                                                         ),
                                                       );
+                                                      
+                                                      // Atualizar a empresa local para refletir a mudança imediatamente
+                                                      _currentCompany.presentation = _model.textFieldApresentacaoTextController.text;
+                                                      
                                                       _model.categorias = 0;
                                                       safeSetState(() {});
                                                     },
@@ -1605,7 +1620,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                             0.0, 0.0, 0.0, 15.0),
                                         child: Text(
                                           valueOrDefault<String>(
-                                            widget!.company?.presentation,
+                                            _currentCompany.presentation,
                                             'Fale um pouco sobre sua empresa ou serviço.',
                                           ),
                                           style: FlutterFlowTheme.of(context)
@@ -1950,6 +1965,12 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                             true,
                                                             ParamType.bool,
                                                           ),
+                                                          'atividade':
+                                                              serializeParam(
+                                                            widget!.atividade,
+                                                            ParamType
+                                                                .SupabaseRow,
+                                                          ),
                                                         }.withoutNulls,
                                                         extra: <String,
                                                             dynamic>{
@@ -2004,7 +2025,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                           ),
                                                           TextSpan(
                                                             text:
-                                                                'Cadastre-se aqui.',
+                                                                'Cadastre aqui.',
                                                             style: TextStyle(
                                                               decoration:
                                                                   TextDecoration
@@ -2586,7 +2607,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                 onTap: () async {
                                                   _model.categorias = 4;
                                                   _model.editar = true;
-                                                  safeSetState(() {});
+          safeSetState(() {});
                                                 },
                                                 child: Icon(
                                                   Icons.edit_outlined,
@@ -3001,8 +3022,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                                         .fontStyle,
                                                                   ),
                                                           elevation: 0.0,
-                                                          borderSide:
-                                                              BorderSide(
+                                                          borderSide: BorderSide(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .secondaryBackground,
@@ -3527,8 +3547,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                                         .fontStyle,
                                                                   ),
                                                           elevation: 0.0,
-                                                          borderSide:
-                                                              BorderSide(
+                                                          borderSide: BorderSide(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .secondaryBackground,
@@ -3765,7 +3784,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                               ),
                                                       enabledBorder:
                                                           OutlineInputBorder(
-                                                        borderSide: BorderSide(
+                                                          borderSide: BorderSide(
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primaryText,
@@ -3931,8 +3950,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                                         .fontStyle,
                                                                   ),
                                                           elevation: 0.0,
-                                                          borderSide:
-                                                              BorderSide(
+                                                          borderSide: BorderSide(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .secondaryBackground,
@@ -4004,8 +4022,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                                         .fontStyle,
                                                                   ),
                                                           elevation: 0.0,
-                                                          borderSide:
-                                                              BorderSide(
+                                                          borderSide: BorderSide(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .secondaryBackground,
@@ -4468,8 +4485,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                                         .fontStyle,
                                                                   ),
                                                           elevation: 0.0,
-                                                          borderSide:
-                                                              BorderSide(
+                                                          borderSide: BorderSide(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .secondaryBackground,
@@ -6244,8 +6260,8 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                          padding: EdgeInsetsDirectional
+                                              .fromSTEB(
                                                   0.0, 0.0, 10.0, 0.0),
                                           child: FaIcon(
                                             FontAwesomeIcons.twitter,
@@ -7611,8 +7627,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                                         .fontStyle,
                                                                   ),
                                                           elevation: 0.0,
-                                                          borderSide:
-                                                              BorderSide(
+                                                          borderSide: BorderSide(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .secondaryBackground,

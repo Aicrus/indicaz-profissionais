@@ -7,14 +7,14 @@ O link de redefinição de senha estava redirecionando para o aplicativo do mora
 
 ### 1. Alteração no Código
 - **Arquivo**: `lib/paginas/autenticacao/esqueci_senha/esqueci_senha_widget.dart`
-- **Linha**: ~365
+- **Linha**: ~371
 - **Alteração**: 
   ```dart
   // ANTES:
-  redirectTo: "https://indicazpara-profissionais-i18qr1.flutterflow.app/novaSenha"
+  redirectTo: "https://indic-az-5nnic8.flutterflow.app/novaSenha"
   
   // DEPOIS:
-  redirectTo: "https://indic-az-5nnic8.flutterflow.app/novaSenha"
+  redirectTo: "https://indicazpara-profissionais-i18qr1.flutterflow.app/novaSenha"
   ```
 
 ### 2. Configuração no Supabase Dashboard
@@ -22,8 +22,8 @@ O link de redefinição de senha estava redirecionando para o aplicativo do mora
 Acesse o Supabase Dashboard e adicione as seguintes URLs na seção **Authentication > URL Configuration > Redirect URLs**:
 
 #### URLs para Adicionar:
-1. `https://indic-az-5nnic8.flutterflow.app/novaSenha`
-2. `https://indic-az-5nnic8.flutterflow.app/resetPassword`
+1. `https://indicazpara-profissionais-i18qr1.flutterflow.app/novaSenha`
+2. `https://indicazpara-profissionais-i18qr1.flutterflow.app/resetPassword`
 3. `indicazprofissionais://indicazprofissionais.com/novaSenha` (para deep link)
 4. `indicazprofissionais://indicazprofissionais.com/resetPassword` (para deep link)
 
@@ -36,7 +36,7 @@ Acesse o Supabase Dashboard e adicione as seguintes URLs na seção **Authentica
 ### 3. Configuração do Site URL
 Certifique-se de que o **Site URL** esteja configurado como:
 ```
-https://indic-az-5nnic8.flutterflow.app
+https://indicazpara-profissionais-i18qr1.flutterflow.app
 ```
 
 ### 4. Teste do Fluxo
@@ -51,7 +51,7 @@ https://indic-az-5nnic8.flutterflow.app
 
 ### 5. URLs de Fallback (Opcional)
 Se ainda houver problemas, você pode também adicionar:
-- `https://indic-az-5nnic8.flutterflow.app/*` (wildcard)
+- `https://indicazpara-profissionais-i18qr1.flutterflow.app/*` (wildcard)
 - `indicazprofissionais://*` (wildcard para deep link)
 
 ## Verificação
@@ -61,6 +61,7 @@ Após fazer essas configurações:
 3. Confirme se a tela "Nova Senha" abre corretamente
 
 ## Observações
-- A URL `https://indic-az-5nnic8.flutterflow.app` é específica para o aplicativo do profissional
-- A URL anterior estava apontando para o aplicativo do morador
-- O deep link `indicazprofissionais://` garante que funcione quando o app estiver instalado 
+- A URL `https://indicazpara-profissionais-i18qr1.flutterflow.app` é específica para o aplicativo do profissional
+- A URL anterior `https://indic-az-5nnic8.flutterflow.app` estava apontando para o aplicativo do morador
+- O deep link `indicazprofissionais://` garante que funcione quando o app estiver instalado
+- **IMPORTANTE**: Como ambos os apps (profissional e morador) usam o mesmo banco Supabase, é crucial configurar as URLs corretas para cada aplicativo 

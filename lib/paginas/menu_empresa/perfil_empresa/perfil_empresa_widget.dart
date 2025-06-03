@@ -67,11 +67,6 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
         _model.categorias = 3;
         safeSetState(() {});
       }
-      // Inicializar atividadeEscolhida se vier como parâmetro
-      if (widget!.atividade != null) {
-        _model.atividadeEscolhida = widget!.atividade!.id;
-        safeSetState(() {});
-      }
     });
 
     _model.textFieldEmpresaTextController ??=
@@ -1798,7 +1793,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                 controller: _model
                                                         .atividadePrincipalValueController ??=
                                                     FormFieldController<int>(
-                                                        null),
+                                                        widget!.company!.mainActivity),
                                                 options: List<int>.from(
                                                     atividadePrincipalActivityRowList
                                                         .map((e) => e.id)
@@ -2339,7 +2334,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                   .querySingleRow(
                                                 queryFn: (q) => q.eqOrNull(
                                                   'id',
-                                                  _model.atividadeEscolhida,
+                                                  widget!.company!.mainActivity,
                                                 ),
                                               ),
                                               builder: (context, snapshot) {
@@ -2382,17 +2377,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                       TextSpan(
                                                         text: valueOrDefault<
                                                             String>(
-                                                          _model.atividadeEscolhida !=
-                                                                  null
-                                                              ? richTextActivityRow
-                                                                  ?.name
-                                                              : valueOrDefault<
-                                                                  String>(
-                                                                  widget!
-                                                                      .atividade
-                                                                      ?.name,
-                                                                  'nome',
-                                                                ),
+                                                          richTextActivityRow?.name,
                                                           'Pintor',
                                                         ),
                                                         style: FlutterFlowTheme
@@ -7578,8 +7563,8 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                         onPressed: () async {
                                                           _model.categorias = 0;
                                                           _model.atividadeEscolhida = null;
-                                                          // Limpar o controller do dropdown
-                                                          _model.atividadePrincipalValueController?.reset();
+                                                          // Resetar o dropdown para a atividade atual da company
+                                                          _model.atividadePrincipalValueController?.value = widget!.company!.mainActivity;
                                                           safeSetState(() {});
                                                         },
                                                         text: 'Cancelar',

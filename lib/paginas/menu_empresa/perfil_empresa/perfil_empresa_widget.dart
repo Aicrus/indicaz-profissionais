@@ -67,6 +67,11 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
         _model.categorias = 3;
         safeSetState(() {});
       }
+      // Inicializar atividadeEscolhida se vier como parâmetro
+      if (widget!.atividade != null) {
+        _model.atividadeEscolhida = widget!.atividade!.id;
+        safeSetState(() {});
+      }
     });
 
     _model.textFieldEmpresaTextController ??=

@@ -65,10 +65,18 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
         TextEditingController(text: widget.company?.presentation);
     _model.textFieldApresentacaoFocusNode ??= FocusNode();
 
-    _model.textFieldTelefoneTextController1 ??= TextEditingController();
+    _model.textFieldTelefoneTextController1 ??= TextEditingController(
+        text: functions.removeMais55(valueOrDefault<String>(
+      widget.company?.phone,
+      '-',
+    )));
     _model.textFieldTelefoneFocusNode1 ??= FocusNode();
 
-    _model.textFieldTelefoneTextController2 ??= TextEditingController();
+    _model.textFieldTelefoneTextController2 ??= TextEditingController(
+        text: functions.removeMais55(valueOrDefault<String>(
+      widget.company?.phone,
+      '-',
+    )));
     _model.textFieldTelefoneFocusNode2 ??= FocusNode();
 
     _model.textFieldTelefoneTextController3 ??= TextEditingController();
@@ -674,34 +682,76 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              Text(
-                                                valueOrDefault<String>(
-                                                  widget.company?.name,
-                                                  'Nome Empresa',
+                                              FutureBuilder<List<CompanyRow>>(
+                                                future: CompanyTable()
+                                                    .querySingleRow(
+                                                  queryFn: (q) => q.eqOrNull(
+                                                    'id',
+                                                    widget.company?.id,
+                                                  ),
                                                 ),
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      font: GoogleFonts.poppins(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontStyle:
+                                                builder: (context, snapshot) {
+                                                  // Customize what your widget looks like when it's loading.
+                                                  if (!snapshot.hasData) {
+                                                    return Center(
+                                                      child: SizedBox(
+                                                        width: 50.0,
+                                                        height: 50.0,
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          valueColor:
+                                                              AlwaysStoppedAnimation<
+                                                                  Color>(
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyMedium
-                                                                .fontStyle,
+                                                                .primary,
+                                                          ),
+                                                        ),
                                                       ),
-                                                      fontSize: 18.0,
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .fontStyle,
+                                                    );
+                                                  }
+                                                  List<CompanyRow>
+                                                      textCompanyRowList =
+                                                      snapshot.data!;
+
+                                                  final textCompanyRow =
+                                                      textCompanyRowList
+                                                              .isNotEmpty
+                                                          ? textCompanyRowList
+                                                              .first
+                                                          : null;
+
+                                                  return Text(
+                                                    valueOrDefault<String>(
+                                                      textCompanyRow?.name,
+                                                      'Nome',
                                                     ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .poppins(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          fontSize: 18.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                  );
+                                                },
                                               ),
                                               Expanded(
                                                 child: Row(
@@ -1603,36 +1653,78 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 15.0),
-                                        child: Text(
-                                          valueOrDefault<String>(
-                                            widget.company?.presentation,
-                                            'Fale um pouco sobre sua empresa ou serviço.',
+                                        child: FutureBuilder<List<CompanyRow>>(
+                                          future: CompanyTable().querySingleRow(
+                                            queryFn: (q) => q.eqOrNull(
+                                              'id',
+                                              widget.company?.id,
+                                            ),
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                font: GoogleFonts.poppins(
-                                                  fontWeight:
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<
+                                                            Color>(
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyMedium
-                                                          .fontWeight,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontStyle,
+                                                          .primary,
+                                                    ),
+                                                  ),
                                                 ),
-                                                letterSpacing: 0.0,
-                                                fontWeight:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontWeight,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontStyle,
+                                              );
+                                            }
+                                            List<CompanyRow>
+                                                textCompanyRowList =
+                                                snapshot.data!;
+
+                                            final textCompanyRow =
+                                                textCompanyRowList.isNotEmpty
+                                                    ? textCompanyRowList.first
+                                                    : null;
+
+                                            return Text(
+                                              valueOrDefault<String>(
+                                                textCompanyRow?.presentation,
+                                                'Fale um pouco sobre sua empresa ou serviço.',
                                               ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        font:
+                                                            GoogleFonts.poppins(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                            );
+                                          },
                                         ),
                                       ),
                                   ],
@@ -2148,13 +2240,24 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                 Expanded(
                                                   child: FFButtonWidget(
                                                     onPressed: () async {
+                                                      _model.companyAtualizada =
+                                                          await CompanyTable()
+                                                              .queryRows(
+                                                        queryFn: (q) =>
+                                                            q.eqOrNull(
+                                                          'id',
+                                                          widget.company?.id,
+                                                        ),
+                                                      );
                                                       _model.atividadeCompany =
                                                           await ActivityTable()
                                                               .queryRows(
                                                         queryFn: (q) =>
                                                             q.eqOrNull(
                                                           'id',
-                                                          widget.company
+                                                          _model
+                                                              .companyAtualizada
+                                                              ?.firstOrNull
                                                               ?.mainActivity,
                                                         ),
                                                       );
@@ -2162,11 +2265,6 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                       _model.atividadeEscolhida =
                                                           null;
                                                       safeSetState(() {});
-                                                      safeSetState(() {
-                                                        _model
-                                                            .atividadePrincipalValueController
-                                                            ?.reset();
-                                                      });
                                                       safeSetState(() {
                                                         _model
                                                             .atividadePrincipalValueController
@@ -2574,7 +2672,12 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                       ),
                                                     ),
                                                     Text(
-                                                      '(11) 98765-4567',
+                                                      functions.removeMais55(
+                                                          valueOrDefault<
+                                                              String>(
+                                                        widget.company?.phone,
+                                                        '-',
+                                                      )),
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -3095,7 +3198,11 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                 ),
                                               ),
                                               Text(
-                                                '(11) 98765-4567',
+                                                functions.removeMais55(
+                                                    valueOrDefault<String>(
+                                                  widget.company?.phone,
+                                                  '-',
+                                                )),
                                                 style: FlutterFlowTheme.of(
                                                         context)
                                                     .bodyMedium

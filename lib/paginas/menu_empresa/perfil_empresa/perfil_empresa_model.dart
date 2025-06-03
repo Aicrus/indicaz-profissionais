@@ -50,6 +50,8 @@ class PerfilEmpresaModel extends FlutterFlowModel<PerfilEmpresaWidget> {
   // Model for AtividadeSecundaria component.
   late AtividadeSecundariaModel atividadeSecundariaModel1;
   // Stores action output result for [Backend Call - Query Rows] action in ButtonLogin widget.
+  List<CompanyRow>? companyAtualizada;
+  // Stores action output result for [Backend Call - Query Rows] action in ButtonLogin widget.
   List<ActivityRow>? atividadeCompany;
   // State field(s) for TextFieldTelefone widget.
   FocusNode? textFieldTelefoneFocusNode1;

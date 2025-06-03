@@ -7564,7 +7564,8 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                           _model.categorias = 0;
                                                           _model.atividadeEscolhida = null;
                                                           // Resetar o dropdown para a atividade atual da company
-                                                          _model.atividadePrincipalValueController?.value = widget!.company!.mainActivity;
+                                                          _model.atividadePrincipalValueController = FormFieldController<int>(widget!.company!.mainActivity);
+                                                          _model.atividadePrincipalValue = widget!.company!.mainActivity;
                                                           safeSetState(() {});
                                                         },
                                                         text: 'Cancelar',

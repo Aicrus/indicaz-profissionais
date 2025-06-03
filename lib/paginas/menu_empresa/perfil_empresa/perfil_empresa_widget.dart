@@ -7563,9 +7563,8 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                         onPressed: () async {
                                                           _model.categorias = 0;
                                                           _model.atividadeEscolhida = null;
-                                                          // SOLUÇÃO DEFINITIVA: Anular controller e valor para reconstrução completa
-                                                          _model.atividadePrincipalValueController = null;
-                                                          _model.atividadePrincipalValue = null;
+                                                          // Resetar o dropdown para a atividade atual da company
+                                                          _model.atividadePrincipalValueController?.value = widget!.company!.mainActivity;
                                                           safeSetState(() {});
                                                         },
                                                         text: 'Cancelar',

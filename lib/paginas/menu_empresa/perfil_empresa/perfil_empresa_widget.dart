@@ -7578,6 +7578,8 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                         onPressed: () async {
                                                           _model.categorias = 0;
                                                           _model.atividadeEscolhida = null;
+                                                          // Limpar o controller do dropdown
+                                                          _model.atividadePrincipalValueController?.reset();
                                                           safeSetState(() {});
                                                         },
                                                         text: 'Cancelar',

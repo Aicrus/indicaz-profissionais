@@ -7572,6 +7572,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                       child: FFButtonWidget(
                                                         onPressed: () async {
                                                           _model.categorias = 0;
+                                                          _model.atividadeEscolhida = null;
                                                           safeSetState(() {});
                                                         },
                                                         text: 'Cancelar',

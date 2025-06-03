@@ -371,7 +371,7 @@ class _EsqueciSenhaWidgetState extends State<EsqueciSenhaWidget> {
                                                           .text,
                                                       context: context,
                                                       redirectTo:
-                                                          "https://indicazpara-profissionais-i18qr1.flutterflow.app/novaSenha",
+                                                          "https://indic-az-5nnic8.flutterflow.app/novaSenha",
                                                     );
                                                     GoRouter.of(context)
                                                         .prepareAuthEvent();

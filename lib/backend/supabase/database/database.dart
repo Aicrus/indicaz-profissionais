@@ -1,0 +1,32 @@
+export '../../../flutter_flow/lat_lng.dart';
+export 'package:supabase_flutter/supabase_flutter.dart' hide Provider;
+
+export '../supabase.dart';
+export 'row.dart';
+export 'table.dart';
+
+export 'tables/company_review_stats.dart';
+export 'tables/housing.dart';
+export 'tables/housing_user_count.dart';
+export 'tables/user_resident.dart';
+export 'tables/user_profissionais.dart';
+export 'tables/housing_user_details.dart';
+export 'tables/avaliation.dart';
+export 'tables/help.dart';
+export 'tables/like_company.dart';
+export 'tables/activity.dart';
+export 'tables/housing_users.dart';
+export 'tables/prohibited_words.dart';
+export 'tables/favorite_company_housing.dart';
+export 'tables/user_favorite_companies.dart';
+export 'tables/daily_user_recommendations.dart';
+export 'tables/housing_companies_view.dart';
+export 'tables/company_reviews_by_housing.dart';
+export 'tables/company.dart';
+export 'tables/question_help.dart';
+export 'tables/wrappers_fdw_stats.dart';
+export 'tables/suport_question.dart';
+export 'tables/company_like_count.dart';
+export 'tables/user_company_housing_limit.dart';
+export 'tables/daily_user_reviews.dart';
+export 'tables/company_housing.dart';

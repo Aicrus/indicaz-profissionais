@@ -1,0 +1,2 @@
+/Users/paulomorales/Downloads/indicaz_profissionais/android/app/.cxx/RelWithDebInfo/384au4xu/x86_64/CMakeFiles/edit_cache.dir
+/Users/paulomorales/Downloads/indicaz_profissionais/android/app/.cxx/RelWithDebInfo/384au4xu/x86_64/CMakeFiles/rebuild_cache.dir

@@ -67,7 +67,7 @@ class _AtividadeAprovadaWidgetState extends State<AtividadeAprovadaWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 290.0,
+      width: 280.0,
       height: 266.0,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).info,
@@ -175,153 +175,162 @@ class _AtividadeAprovadaWidgetState extends State<AtividadeAprovadaWidget> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                FFButtonWidget(
-                  onPressed: () async {
-                    context.safePop();
-                  },
-                  text: 'Voltar',
-                  options: FFButtonOptions(
-                    width: 120.0,
-                    height: 40.0,
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).info,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          font: GoogleFonts.rubik(
-                            fontWeight: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .fontWeight,
-                            fontStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .fontStyle,
-                          ),
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          fontSize: 8.0,
-                          letterSpacing: 0.0,
-                          fontWeight: FlutterFlowTheme.of(context)
-                              .titleSmall
-                              .fontWeight,
-                          fontStyle:
-                              FlutterFlowTheme.of(context).titleSmall.fontStyle,
-                        ),
-                    elevation: 0.0,
-                    borderSide: BorderSide(
-                      color: FlutterFlowTheme.of(context).primary,
+                Expanded(
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      context.safePop();
+                    },
+                    text: 'Voltar',
+                    options: FFButtonOptions(
+                      width: 120.0,
+                      height: 40.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).info,
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                font: GoogleFonts.rubik(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .fontStyle,
+                                ),
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                fontSize: 8.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .fontStyle,
+                              ),
+                      elevation: 0.0,
+                      borderSide: BorderSide(
+                        color: FlutterFlowTheme.of(context).primary,
+                      ),
+                      borderRadius: BorderRadius.circular(18.0),
                     ),
-                    borderRadius: BorderRadius.circular(18.0),
                   ),
                 ),
-                FFButtonWidget(
-                  onPressed: () async {
-                    _model.atividadeCadastrada = await ActivityTable().insert({
-                      'name': widget.detalhes,
-                      'status': true,
-                    });
-                    if (widget.perfilEmpresa) {
-                      context.pushNamed(
-                        PerfilEmpresaWidget.routeName,
-                        queryParameters: {
-                          'company': serializeParam(
-                            widget.company,
-                            ParamType.SupabaseRow,
-                          ),
-                          'atividade': serializeParam(
-                            _model.atividadeCadastrada,
-                            ParamType.SupabaseRow,
-                          ),
-                          'categoria': serializeParam(
-                            3,
-                            ParamType.int,
-                          ),
-                        }.withoutNulls,
-                      );
-                    } else {
-                      context.pushNamed(
-                        DadosEmpresaWidget.routeName,
-                        queryParameters: {
-                          'company': serializeParam(
-                            widget.company,
-                            ParamType.SupabaseRow,
-                          ),
-                          'criar': serializeParam(
-                            widget.criar,
-                            ParamType.bool,
-                          ),
-                          'phone': serializeParam(
-                            widget.phone,
-                            ParamType.String,
-                          ),
-                          'atividade': serializeParam(
-                            _model.atividadeCadastrada,
-                            ParamType.SupabaseRow,
-                          ),
-                          'idUser': serializeParam(
-                            widget.idUser,
-                            ParamType.int,
-                          ),
-                          'endereco': serializeParam(
-                            widget.endereco,
-                            ParamType.String,
-                          ),
-                          'nomeEmpresa': serializeParam(
-                            widget.nomeEmpresa,
-                            ParamType.String,
-                          ),
-                          'img': serializeParam(
-                            widget.img,
-                            ParamType.String,
-                          ),
-                        }.withoutNulls,
-                        extra: <String, dynamic>{
-                          kTransitionInfoKey: TransitionInfo(
-                            hasTransition: true,
-                            transitionType: PageTransitionType.fade,
-                            duration: Duration(milliseconds: 0),
-                          ),
-                        },
-                      );
-                    }
+                Expanded(
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      _model.atividadeCadastrada =
+                          await ActivityTable().insert({
+                        'name': widget.detalhes,
+                        'status': true,
+                      });
+                      if (widget.perfilEmpresa) {
+                        context.pushNamed(
+                          PerfilEmpresaWidget.routeName,
+                          queryParameters: {
+                            'company': serializeParam(
+                              widget.company,
+                              ParamType.SupabaseRow,
+                            ),
+                            'atividade': serializeParam(
+                              _model.atividadeCadastrada,
+                              ParamType.SupabaseRow,
+                            ),
+                            'categoria': serializeParam(
+                              3,
+                              ParamType.int,
+                            ),
+                          }.withoutNulls,
+                        );
+                      } else {
+                        context.pushNamed(
+                          DadosEmpresaWidget.routeName,
+                          queryParameters: {
+                            'company': serializeParam(
+                              widget.company,
+                              ParamType.SupabaseRow,
+                            ),
+                            'criar': serializeParam(
+                              widget.criar,
+                              ParamType.bool,
+                            ),
+                            'phone': serializeParam(
+                              widget.phone,
+                              ParamType.String,
+                            ),
+                            'atividade': serializeParam(
+                              _model.atividadeCadastrada,
+                              ParamType.SupabaseRow,
+                            ),
+                            'idUser': serializeParam(
+                              widget.idUser,
+                              ParamType.int,
+                            ),
+                            'endereco': serializeParam(
+                              widget.endereco,
+                              ParamType.String,
+                            ),
+                            'nomeEmpresa': serializeParam(
+                              widget.nomeEmpresa,
+                              ParamType.String,
+                            ),
+                            'img': serializeParam(
+                              widget.img,
+                              ParamType.String,
+                            ),
+                          }.withoutNulls,
+                          extra: <String, dynamic>{
+                            kTransitionInfoKey: TransitionInfo(
+                              hasTransition: true,
+                              transitionType: PageTransitionType.fade,
+                              duration: Duration(milliseconds: 0),
+                            ),
+                          },
+                        );
+                      }
 
-                    safeSetState(() {});
-                  },
-                  text: 'Cadastrar',
-                  options: FFButtonOptions(
-                    width: 120.0,
-                    height: 40.0,
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          font: GoogleFonts.rubik(
-                            fontWeight: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .fontWeight,
-                            fontStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .fontStyle,
-                          ),
-                          color: FlutterFlowTheme.of(context).info,
-                          fontSize: 8.0,
-                          letterSpacing: 0.0,
-                          fontWeight: FlutterFlowTheme.of(context)
-                              .titleSmall
-                              .fontWeight,
-                          fontStyle:
-                              FlutterFlowTheme.of(context).titleSmall.fontStyle,
-                        ),
-                    elevation: 1.5,
-                    borderSide: BorderSide(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      safeSetState(() {});
+                    },
+                    text: 'Cadastrar',
+                    options: FFButtonOptions(
+                      width: 120.0,
+                      height: 40.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                font: GoogleFonts.rubik(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .fontStyle,
+                                ),
+                                color: FlutterFlowTheme.of(context).info,
+                                fontSize: 8.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .fontStyle,
+                              ),
+                      elevation: 1.5,
+                      borderSide: BorderSide(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
+                      borderRadius: BorderRadius.circular(18.0),
                     ),
-                    borderRadius: BorderRadius.circular(18.0),
                   ),
                 ),
-              ],
+              ].divide(SizedBox(width: 10.0)),
             ),
           ],
         ),

@@ -46,7 +46,6 @@ class _EnderecoWidgetState extends State<EnderecoWidget> {
         children: [
           Container(
             width: 385.0,
-            height: 500.0,
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).info,
               borderRadius: BorderRadius.circular(10.0),

@@ -2240,6 +2240,10 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                 Expanded(
                                                   child: FFButtonWidget(
                                                     onPressed: () async {
+                                                      _model.categorias = 0;
+                                                      _model.atividadeEscolhida =
+                                                          null;
+                                                      safeSetState(() {});
                                                       _model.companyAtualizada =
                                                           await CompanyTable()
                                                               .queryRows(
@@ -2261,10 +2265,6 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                               ?.mainActivity,
                                                         ),
                                                       );
-                                                      _model.categorias = 0;
-                                                      _model.atividadeEscolhida =
-                                                          null;
-                                                      safeSetState(() {});
                                                       safeSetState(() {
                                                         _model
                                                             .atividadePrincipalValueController
@@ -2434,77 +2434,144 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 25.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Icon(
-                                              Icons.check,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .tertiary,
-                                              size: 24.0,
+                                        child: FutureBuilder<List<CompanyRow>>(
+                                          future: CompanyTable().querySingleRow(
+                                            queryFn: (q) => q.eqOrNull(
+                                              'id',
+                                              widget.company?.id,
                                             ),
-                                            FutureBuilder<List<ActivityRow>>(
-                                              future: ActivityTable()
-                                                  .querySingleRow(
-                                                queryFn: (q) => q.eqOrNull(
-                                                  'id',
-                                                  _model.atividadeEscolhida,
-                                                ),
-                                              ),
-                                              builder: (context, snapshot) {
-                                                // Customize what your widget looks like when it's loading.
-                                                if (!snapshot.hasData) {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      width: 50.0,
-                                                      height: 50.0,
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        valueColor:
-                                                            AlwaysStoppedAnimation<
-                                                                Color>(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                        ),
-                                                      ),
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<
+                                                            Color>(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primary,
                                                     ),
-                                                  );
-                                                }
-                                                List<ActivityRow>
-                                                    richTextActivityRowList =
-                                                    snapshot.data!;
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<CompanyRow> rowCompanyRowList =
+                                                snapshot.data!;
 
-                                                final richTextActivityRow =
-                                                    richTextActivityRowList
-                                                            .isNotEmpty
-                                                        ? richTextActivityRowList
-                                                            .first
-                                                        : null;
+                                            final rowCompanyRow =
+                                                rowCompanyRowList.isNotEmpty
+                                                    ? rowCompanyRowList.first
+                                                    : null;
 
-                                                return RichText(
-                                                  textScaler:
-                                                      MediaQuery.of(context)
-                                                          .textScaler,
-                                                  text: TextSpan(
-                                                    children: [
-                                                      TextSpan(
-                                                        text: valueOrDefault<
-                                                            String>(
-                                                          _model.atividadeEscolhida !=
-                                                                  null
-                                                              ? richTextActivityRow
-                                                                  ?.name
-                                                              : valueOrDefault<
-                                                                  String>(
-                                                                  widget
-                                                                      .atividade
-                                                                      ?.name,
-                                                                  'nome',
-                                                                ),
-                                                          'Pintor',
+                                            return Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Icon(
+                                                  Icons.check,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .tertiary,
+                                                  size: 24.0,
+                                                ),
+                                                FutureBuilder<
+                                                    List<ActivityRow>>(
+                                                  future: ActivityTable()
+                                                      .querySingleRow(
+                                                    queryFn: (q) => q.eqOrNull(
+                                                      'id',
+                                                      rowCompanyRow
+                                                          ?.mainActivity,
+                                                    ),
+                                                  ),
+                                                  builder: (context, snapshot) {
+                                                    // Customize what your widget looks like when it's loading.
+                                                    if (!snapshot.hasData) {
+                                                      return Center(
+                                                        child: SizedBox(
+                                                          width: 50.0,
+                                                          height: 50.0,
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                            valueColor:
+                                                                AlwaysStoppedAnimation<
+                                                                    Color>(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primary,
+                                                            ),
+                                                          ),
                                                         ),
+                                                      );
+                                                    }
+                                                    List<ActivityRow>
+                                                        richTextActivityRowList =
+                                                        snapshot.data!;
+
+                                                    // Return an empty Container when the item does not exist.
+                                                    if (snapshot
+                                                        .data!.isEmpty) {
+                                                      return Container();
+                                                    }
+                                                    final richTextActivityRow =
+                                                        richTextActivityRowList
+                                                                .isNotEmpty
+                                                            ? richTextActivityRowList
+                                                                .first
+                                                            : null;
+
+                                                    return RichText(
+                                                      textScaler:
+                                                          MediaQuery.of(context)
+                                                              .textScaler,
+                                                      text: TextSpan(
+                                                        children: [
+                                                          TextSpan(
+                                                            text:
+                                                                valueOrDefault<
+                                                                    String>(
+                                                              richTextActivityRow
+                                                                  ?.name,
+                                                              'name',
+                                                            ),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .poppins(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  fontSize:
+                                                                      15.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                          ),
+                                                          TextSpan(
+                                                            text:
+                                                                ' (Principal) ',
+                                                            style: TextStyle(),
+                                                          )
+                                                        ],
                                                         style: FlutterFlowTheme
                                                                 .of(context)
                                                             .bodyMedium
@@ -2532,41 +2599,12 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                                       .fontStyle,
                                                             ),
                                                       ),
-                                                      TextSpan(
-                                                        text: ' (Principal) ',
-                                                        style: TextStyle(),
-                                                      )
-                                                    ],
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          font: GoogleFonts
-                                                              .poppins(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontStyle,
-                                                          ),
-                                                          fontSize: 15.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                          ].divide(SizedBox(width: 10.0)),
+                                                    );
+                                                  },
+                                                ),
+                                              ].divide(SizedBox(width: 10.0)),
+                                            );
+                                          },
                                         ),
                                       ),
                                   ],

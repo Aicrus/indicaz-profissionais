@@ -60,73 +60,29 @@ class _DadosEmpresaWidgetState extends State<DadosEmpresaWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      // Inicializar imagem
-      _model.img = widget!.img != null && widget!.img != ''
-          ? widget!.img
-          : widget!.company?.photo;
+      _model.img = widget.img != ''
+          ? widget.img
+          : widget.company?.photo;
       safeSetState(() {});
-      
-      // Carregar atividades
       _model.atividadesDrop = await ActivityTable().queryRows(
         queryFn: (q) => q,
       );
       _model.atividadesDropLista =
           _model.atividadesDrop!.toList().cast<ActivityRow>();
       safeSetState(() {});
-      
-      // Inicializar nome da empresa
-      if (widget!.nomeEmpresa != null && widget!.nomeEmpresa != '') {
+      if (widget.nomeEmpresa != null && widget.nomeEmpresa != '') {
         safeSetState(() {
-          _model.nomeEmpresaTextController?.text = widget!.nomeEmpresa!;
+          _model.nomeEmpresaTextController?.text = widget.nomeEmpresa!;
         });
-      } else if (widget!.company?.name != null) {
-        safeSetState(() {
-          _model.nomeEmpresaTextController?.text = widget!.company!.name!;
-        });
-      }
-      
-      // Inicializar endereço se já existe
-      if (widget!.endereco != null && widget!.endereco != '') {
-        // Se já tem endereço passado como parâmetro, não precisa validar
-        _model.falltaEndereco = false;
-        
-        // Extrair coordenadas do endereço se estiver no formato completo
-        String enderecoCompleto = widget!.endereco!;
-        RegExp regexCoords = RegExp(r'LatLng\(lat:\s*(-?\d+\.\d+),\s*lng:\s*(-?\d+\.\d+)\)');
-        Match? matchCoords = regexCoords.firstMatch(enderecoCompleto);
-        
-        if (matchCoords != null) {
-          // Extrair latitude e longitude
-          double lat = double.parse(matchCoords.group(1)!);
-          double lng = double.parse(matchCoords.group(2)!);
-          
-          // Extrair apenas o endereço sem as coordenadas
-          String enderecoLimpo = enderecoCompleto.replaceAll(regexCoords, '').trim();
-          if (enderecoLimpo.endsWith(',')) {
-            enderecoLimpo = enderecoLimpo.substring(0, enderecoLimpo.length - 1);
-          }
-          
-          // Inicializar o placePickerValue com os dados extraídos
-          _model.placePickerValue = FFPlace(
-            address: enderecoLimpo,
-            latLng: LatLng(lat, lng),
-          );
-        }
       } else {
-        // Se não tem endereço, marcar como necessário
-        _model.falltaEndereco = false; // Não mostrar erro inicialmente
+        safeSetState(() {
+          _model.nomeEmpresaTextController?.text = widget.company!.name!;
+        });
       }
-      
-      // Inicializar atividade se já existe
-      if (widget!.atividade?.id != null) {
-        _model.atividadePrincipalValue = widget!.atividade!.id;
-      }
-      
-      safeSetState(() {});
     });
 
     _model.nomeEmpresaTextController ??=
-        TextEditingController(text: widget!.company?.name);
+        TextEditingController(text: widget.company?.name);
     _model.nomeEmpresaFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -193,7 +149,6 @@ class _DadosEmpresaWidgetState extends State<DadosEmpresaWidget> {
                               onTap: () async {
                                 await showDialog(
                                   context: context,
-                                  barrierDismissible: true,
                                   builder: (dialogContext) {
                                     return Dialog(
                                       elevation: 0,
@@ -203,10 +158,13 @@ class _DadosEmpresaWidgetState extends State<DadosEmpresaWidget> {
                                           .resolve(Directionality.of(context)),
                                       child: GestureDetector(
                                         onTap: () {
-                                          Navigator.pop(dialogContext);
+                                          FocusScope.of(dialogContext)
+                                              .unfocus();
+                                          FocusManager.instance.primaryFocus
+                                              ?.unfocus();
                                         },
                                         child: Container(
-                                          height: 650.0,
+                                          height: 500.0,
                                           width: 385.0,
                                           child: EnderecoWidget(),
                                         ),
@@ -339,18 +297,15 @@ class _DadosEmpresaWidgetState extends State<DadosEmpresaWidget> {
                                         fit: BoxFit.cover,
                                         image: Image.network(
                                           () {
-                                            if (widget!.criar == false) {
+                                            if (widget.criar == false) {
                                               return valueOrDefault<String>(
-                                                widget!.company?.photo,
+                                                widget.company?.photo,
                                                 '-',
                                               );
-                                            } else if ((widget!.img != null &&
-                                                    widget!.img != '') &&
+                                            } else if ((widget.img != '') &&
                                                 (_model.uploadedFileUrl_uploadDataRy7 ==
-                                                        null ||
-                                                    _model.uploadedFileUrl_uploadDataRy7 ==
                                                         '')) {
-                                              return widget!.img;
+                                              return widget.img;
                                             } else {
                                               return _model
                                                   .uploadedFileUrl_uploadDataRy7;
@@ -654,8 +609,8 @@ class _DadosEmpresaWidgetState extends State<DadosEmpresaWidget> {
                                         .fontStyle,
                                   ),
                               hintText: valueOrDefault<String>(
-                                widget!.atividade != null
-                                    ? widget!.atividade?.name
+                                widget.atividade != null
+                                    ? widget.atividade?.name
                                     : 'Atividades',
                                 'Atividades',
                               ),
@@ -742,34 +697,27 @@ class _DadosEmpresaWidgetState extends State<DadosEmpresaWidget> {
                                                       .routeName,
                                                   queryParameters: {
                                                     'company': serializeParam(
-                                                      widget!.company,
+                                                      widget.company,
                                                       ParamType.SupabaseRow,
                                                     ),
                                                     'criar': serializeParam(
-                                                      widget!.criar,
+                                                      widget.criar,
                                                       ParamType.bool,
                                                     ),
                                                     'phone': serializeParam(
-                                                      widget!.phone,
+                                                      widget.phone,
                                                       ParamType.String,
                                                     ),
                                                     'atividade': serializeParam(
-                                                      widget!.atividade,
+                                                      widget.atividade,
                                                       ParamType.SupabaseRow,
                                                     ),
                                                     'isUser': serializeParam(
-                                                      widget!.idUser,
+                                                      widget.idUser,
                                                       ParamType.int,
                                                     ),
                                                     'endereco': serializeParam(
-                                                      () {
-                                                        // Se já tem endereço selecionado no PlacePicker, usa ele
-                                                        if (_model.placePickerValue.address != null && _model.placePickerValue.address != '') {
-                                                          return '${_model.placePickerValue.address}${_model.placePickerValue.latLng?.toString()}';
-                                                        }
-                                                        // Senão, usa o endereço que veio como parâmetro
-                                                        return widget!.endereco;
-                                                      }(),
+                                                      widget.endereco,
                                                       ParamType.String,
                                                     ),
                                                     'nomeEmpresa':
@@ -780,18 +728,8 @@ class _DadosEmpresaWidgetState extends State<DadosEmpresaWidget> {
                                                       ParamType.String,
                                                     ),
                                                     'img': serializeParam(
-                                                      () {
-                                                        // Se fez upload de uma nova imagem, usa ela
-                                                        if (_model.uploadedFileUrl_uploadDataRy7 != null && _model.uploadedFileUrl_uploadDataRy7 != '') {
-                                                          return _model.uploadedFileUrl_uploadDataRy7;
-                                                        }
-                                                        // Senão, usa a imagem atual do modelo
-                                                        if (_model.img != null && _model.img != '') {
-                                                          return _model.img;
-                                                        }
-                                                        // Por último, usa a imagem que veio como parâmetro
-                                                        return widget!.img;
-                                                      }(),
+                                                      _model
+                                                          .uploadedFileUrl_uploadDataRy7,
                                                       ParamType.String,
                                                     ),
                                                   }.withoutNulls,
@@ -846,136 +784,153 @@ class _DadosEmpresaWidgetState extends State<DadosEmpresaWidget> {
                     ),
                     Container(
                       width: double.infinity,
-                      height: 120.0,
+                      height: 100.0,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.0),
                         border: Border.all(
-                          color: _model.falltaEndereco 
-                              ? FlutterFlowTheme.of(context).error
-                              : FlutterFlowTheme.of(context).primary,
-                          width: 1.0,
+                          color: FlutterFlowTheme.of(context).primary,
                         ),
                       ),
-                      child: Stack(
+                      child: Align(
                         alignment: AlignmentDirectional(1.0, 0.0),
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    () {
-                                      String enderecoAtual = widget!.endereco != null && widget!.endereco != ''
-                                          ? widget!.endereco!
-                                          : '${_model.placePickerValue.address}${_model.placePickerValue.latLng?.toString()}';
-                                      
-                                      String resultado = functions.validarEndereco(enderecoAtual);
-                                      
-                                      if (resultado == 'Selecione um endereço.') {
-                                        return 'Clique para selecionar um endereço';
-                                      } else if (resultado == 'Endereço incompleto. Por favor, selecione um endereço válido contendo: Rua, número, bairro, cidade, estado.') {
-                                        return 'Endereço incompleto.\nPor favor, selecione um endereço válido\ncontendo: Rua, número, bairro,\ncidade, estado.';
-                                      } else {
-                                        return resultado;
-                                      }
-                                    }(),
-                                    maxLines: 4,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                      font: GoogleFonts.poppins(
-                                        fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                      ),
-                                      color: () {
-                                        String enderecoAtual = widget!.endereco != null && widget!.endereco != ''
-                                            ? widget!.endereco!
-                                            : '${_model.placePickerValue.address}${_model.placePickerValue.latLng?.toString()}';
-                                        
-                                        String resultado = functions.validarEndereco(enderecoAtual);
-                                        
-                                        // Se _model.falltaEndereco é true (erro após validação), mostra vermelho
-                                        if (_model.falltaEndereco) {
-                                          return FlutterFlowTheme.of(context).error;
-                                        }
-                                        
-                                        // Se o endereço não foi selecionado ainda, mostra cinza (estado inicial)
-                                        if (resultado == 'Selecione um endereço.') {
-                                          return FlutterFlowTheme.of(context).secondaryText;
-                                        }
-                                        
-                                        // Se há erro de validação (endereço incompleto), mostra vermelho
-                                        if (resultado.startsWith('Endereço incompleto')) {
-                                          return FlutterFlowTheme.of(context).error;
-                                        }
-                                        
-                                        // Se está tudo ok, mostra preto
-                                        return FlutterFlowTheme.of(context).primaryText;
-                                      }(),
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                        child: Stack(
+                          alignment: AlignmentDirectional(1.0, 0.0),
+                          children: [
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  10.0, 0.0, 10.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 267.12,
+                                    decoration: BoxDecoration(),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            functions.validarEndereco(widget
+                                                            .endereco !=
+                                                        null &&
+                                                    widget.endereco != ''
+                                                ? widget.endereco!
+                                                : '${_model.placePickerValue.address}${_model.placePickerValue.latLng.toString()}'),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  font: GoogleFonts.poppins(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  color: functions.validarEndereco(
+                                                              '${_model.placePickerValue.address}${_model.placePickerValue.latLng.toString()}') ==
+                                                          'Endereço incompleto. Por favor, selecione um endereço válido contendo: Rua, número, bairro, cidade, estado.'
+                                                      ? FlutterFlowTheme.of(
+                                                              context)
+                                                          .error
+                                                      : FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryText,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                          Container(
-                            width: double.infinity,
-                            height: 100.0,
-                            decoration: BoxDecoration(),
-                            child: Align(
-                              alignment: AlignmentDirectional(1.0, 0.0),
-                              child: FlutterFlowPlacePicker(
-                                iOSGoogleMapsApiKey: 'AIzaSyC6Lv11L9KMnGIJt8Zwg3UVTn8QvO3653I',
-                                androidGoogleMapsApiKey: 'AIzaSyC6Lv11L9KMnGIJt8Zwg3UVTn8QvO3653I',
-                                webGoogleMapsApiKey: 'AIzaSyC6Lv11L9KMnGIJt8Zwg3UVTn8QvO3653I',
-                                onSelect: (place) async {
-                                  safeSetState(() {
-                                    _model.placePickerValue = place;
-                                    _model.falltaEndereco = false;
-                                  });
-                                },
-                                defaultText: '',
-                                icon: Icon(
-                                  Icons.place,
-                                  color: Color(0x00141735),
-                                  size: 25.0,
-                                ),
-                                buttonOptions: FFButtonOptions(
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  color: Colors.transparent,
-                                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                                    font: GoogleFonts.rubik(
-                                      fontWeight: FlutterFlowTheme.of(context).titleSmall.fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context).titleSmall.fontStyle,
-                                    ),
-                                    color: Colors.transparent,
-                                    fontSize: 14.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context).titleSmall.fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                            Container(
+                              width: double.infinity,
+                              height: 100.0,
+                              decoration: BoxDecoration(),
+                              child: Align(
+                                alignment: AlignmentDirectional(1.0, 0.0),
+                                child: FlutterFlowPlacePicker(
+                                  iOSGoogleMapsApiKey:
+                                      'AIzaSyC6Lv11L9KMnGIJt8Zwg3UVTn8QvO3653I',
+                                  androidGoogleMapsApiKey:
+                                      'AIzaSyC6Lv11L9KMnGIJt8Zwg3UVTn8QvO3653I',
+                                  webGoogleMapsApiKey:
+                                      'AIzaSyC6Lv11L9KMnGIJt8Zwg3UVTn8QvO3653I',
+                                  onSelect: (place) async {
+                                    safeSetState(
+                                        () => _model.placePickerValue = place);
+                                  },
+                                  defaultText: '',
+                                  icon: Icon(
+                                    Icons.place,
+                                    color: Color(0x00141735),
+                                    size: 25.0,
                                   ),
-                                  elevation: 0.0,
-                                  borderRadius: BorderRadius.circular(24.0),
+                                  buttonOptions: FFButtonOptions(
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    color: Colors.transparent,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          font: GoogleFonts.rubik(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontStyle,
+                                          ),
+                                          color: Colors.transparent,
+                                          fontSize: 14.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontStyle,
+                                        ),
+                                    elevation: 0.0,
+                                    borderRadius: BorderRadius.circular(24.0),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional(0.9, 0.13),
-                            child: Icon(
-                              Icons.location_on_sharp,
-                              color: FlutterFlowTheme.of(context).primary,
-                              size: 25.0,
+                            Align(
+                              alignment: AlignmentDirectional(0.9, 0.13),
+                              child: Icon(
+                                Icons.location_on_sharp,
+                                color: FlutterFlowTheme.of(context).primary,
+                                size: 25.0,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     if (_model.falltaEndereco)
@@ -1028,239 +983,246 @@ class _DadosEmpresaWidgetState extends State<DadosEmpresaWidget> {
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     var _shouldSetState = false;
-                                    
-                                    // Validar formulário primeiro
                                     if (_model.formKey.currentState == null ||
-                                        !_model.formKey.currentState!.validate()) {
+                                        !_model.formKey.currentState!
+                                            .validate()) {
                                       return;
                                     }
-                                    
-                                    // Validar imagem
-                                    if (_model.img == null || _model.img == '') {
-                                      _model.erroImagem = true;
-                                      safeSetState(() {});
-                                      return;
-                                    } else {
-                                      _model.erroImagem = false;
-                                      safeSetState(() {});
-                                    }
-                                    
-                                    // Validar endereço SEMPRE
-                                    String enderecoAtual = widget!.endereco != null && widget!.endereco != ''
-                                        ? widget!.endereco!
-                                        : '${_model.placePickerValue.address}${_model.placePickerValue.latLng?.toString()}';
-                                        
-                                    if (functions.validarEndereco(enderecoAtual) == 'Selecione um endereço.') {
-                                      _model.falltaEndereco = true;
-                                      safeSetState(() {});
-                                      return;
-                                    } else if (functions.validarEndereco(enderecoAtual) == 'Endereço incompleto. Por favor, selecione um endereço válido contendo: Rua, número, bairro, cidade, estado.') {
-                                      _model.falltaEndereco = true;
-                                      safeSetState(() {});
-                                      return;
-                                    } else {
-                                      _model.falltaEndereco = false;
-                                      safeSetState(() {});
-                                    }
+                                    if (_model.img != null &&
+                                        _model.img != '') {
+                                      if (functions.validarEndereco(widget
+                                                          .endereco !=
+                                                      null &&
+                                                  widget.endereco != ''
+                                              ? widget.endereco!
+                                              : '${_model.placePickerValue.address}${_model.placePickerValue.latLng.toString()}') ==
+                                          'Selecione um endereço.') {
+                                        _model.falltaEndereco = true;
+                                        safeSetState(() {});
+                                      } else {
+                                        _model.falltaEndereco = false;
+                                        safeSetState(() {});
+                                        if (functions.validarEndereco(widget
+                                                            .endereco !=
+                                                        null &&
+                                                    widget.endereco != ''
+                                                ? widget.endereco!
+                                                : '${_model.placePickerValue.address}${_model.placePickerValue.latLng.toString()}') ==
+                                            'Endereço incompleto. Por favor, selecione um endereço válido contendo: Rua, número, bairro, cidade, estado.') {
+                                          if (_shouldSetState)
+                                            safeSetState(() {});
+                                          return;
+                                        }
 
-                                    // Verificar palavras proibidas
-                                    _model.verif = await ProhibitedWordsTable().queryRows(
-                                      queryFn: (q) => q.eqOrNull(
-                                        'name',
-                                        _model.nomeEmpresaTextController.text,
-                                      ),
-                                    );
-                                    _shouldSetState = true;
-                                    
-                                    if (functions.compararMinuscula(
-                                        _model.verif?.firstOrNull?.name,
-                                        _model.nomeEmpresaTextController.text)) {
-                                      showDialog(
-                                        context: context,
-                                        builder: (dialogContext) {
-                                          return Dialog(
-                                            elevation: 0,
-                                            insetPadding: EdgeInsets.zero,
-                                            backgroundColor: Colors.transparent,
-                                            alignment: AlignmentDirectional(0.0, 0.0)
-                                                .resolve(Directionality.of(context)),
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                FocusScope.of(dialogContext).unfocus();
-                                                FocusManager.instance.primaryFocus?.unfocus();
-                                              },
-                                              child: NomeNaopermitidoWidget(),
-                                            ),
+                                        _model.verif =
+                                            await ProhibitedWordsTable()
+                                                .queryRows(
+                                          queryFn: (q) => q.eqOrNull(
+                                            'name',
+                                            _model
+                                                .nomeEmpresaTextController.text,
+                                          ),
+                                        );
+                                        _shouldSetState = true;
+                                        if (functions.compararMinuscula(
+                                            _model.verif?.firstOrNull?.name,
+                                            _model.nomeEmpresaTextController
+                                                .text)) {
+                                          showDialog(
+                                            context: context,
+                                            builder: (dialogContext) {
+                                              return Dialog(
+                                                elevation: 0,
+                                                insetPadding: EdgeInsets.zero,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                alignment: AlignmentDirectional(
+                                                        0.0, 0.0)
+                                                    .resolve(Directionality.of(
+                                                        context)),
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    FocusScope.of(dialogContext)
+                                                        .unfocus();
+                                                    FocusManager
+                                                        .instance.primaryFocus
+                                                        ?.unfocus();
+                                                  },
+                                                  child:
+                                                      NomeNaopermitidoWidget(),
+                                                ),
+                                              );
+                                            },
                                           );
-                                        },
-                                      );
-                                    } else {
-                                      showDialog(
-                                        context: context,
-                                        builder: (dialogContext) {
-                                          return Dialog(
-                                            elevation: 0,
-                                            insetPadding: EdgeInsets.zero,
-                                            backgroundColor: Colors.transparent,
-                                            alignment: AlignmentDirectional(0.0, 0.0)
-                                                .resolve(Directionality.of(context)),
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                FocusScope.of(dialogContext).unfocus();
-                                                FocusManager.instance.primaryFocus?.unfocus();
-                                              },
-                                              child: ConfirmaEmpresaWidget(
-                                                img: _model.img,
-                                                nome: _model.nomeEmpresaTextController.text,
-                                                atividadeId: _model.atividadePrincipalValue,
-                                                like: '',
-                                                avaliacao: '',
-                                                totalAvaliacao: '',
-                                                acao: () async {
-                                                  try {
-                                                    if (widget!.criar ==
-                                                        true) {
-                                                      _model.idCompany =
-                                                          await CompanyTable()
-                                                              .insert({
-                                                        'name': _model
-                                                            .nomeEmpresaTextController
-                                                            .text,
-                                                        'phone':
-                                                            widget!.phone,
-                                                        'main_activity': _model
-                                                            .atividadePrincipalValue,
-                                                        'photo': _model.img,
-                                                        'activated': true,
-                                                        'user_profissional':
-                                                            widget!.idUser,
-                                                        'user_created':
-                                                            currentUserUid,
-                                                        'address': widget!
-                                                                .endereco !=
-                                                            null &&
-                                                        widget!.endereco !=
-                                                            ''
-                                                        ? widget!.endereco
-                                                        : '${_model.placePickerValue.address}${_model.placePickerValue.latLng?.toString()}',
-                                                      });
-                                                      await UserProfissionaisTable()
-                                                          .update(
-                                                        data: {
-                                                          'company': _model
-                                                              .idCompany?.id,
-                                                        },
-                                                        matchingRows:
-                                                            (rows) =>
-                                                                rows.eqOrNull(
-                                                          'id',
-                                                          widget!.idUser,
-                                                        ),
-                                                      );
-                                                    } else {
-                                                      await CompanyTable()
-                                                          .update(
-                                                        data: {
-                                                          'name': _model.nomeEmpresaTextController
-                                                                          .text ==
-                                                                      null ||
-                                                                  _model.nomeEmpresaTextController
-                                                                          .text ==
-                                                                      ''
-                                                              ? widget!
-                                                                  .company
-                                                                  ?.name
-                                                              : _model
-                                                                  .nomeEmpresaTextController
-                                                                  .text,
+                                        } else {
+                                          showDialog(
+                                            context: context,
+                                            builder: (dialogContext) {
+                                              return Dialog(
+                                                elevation: 0,
+                                                insetPadding: EdgeInsets.zero,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                alignment: AlignmentDirectional(
+                                                        0.0, 0.0)
+                                                    .resolve(Directionality.of(
+                                                        context)),
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    FocusScope.of(dialogContext)
+                                                        .unfocus();
+                                                    FocusManager
+                                                        .instance.primaryFocus
+                                                        ?.unfocus();
+                                                  },
+                                                  child: ConfirmaEmpresaWidget(
+                                                    img: _model.img,
+                                                    nome: _model
+                                                        .nomeEmpresaTextController
+                                                        .text,
+                                                    atividadeId: _model
+                                                        .atividadePrincipalValue,
+                                                    like: '',
+                                                    avaliacao: '',
+                                                    totalAvaliacao: '',
+                                                    acao: () async {
+                                                      if (widget.criar ==
+                                                          true) {
+                                                        _model.idCompany =
+                                                            await CompanyTable()
+                                                                .insert({
+                                                          'name': _model
+                                                              .nomeEmpresaTextController
+                                                              .text,
                                                           'phone':
-                                                              widget!.phone,
+                                                              widget.phone,
                                                           'main_activity': _model
-                                                                      .atividadePrincipalValue ==
-                                                                  null
-                                                              ? widget!
-                                                                  .company
-                                                                  ?.mainActivity
-                                                              : _model
-                                                                  .atividadePrincipalValue,
-                                                          'photo': _model
-                                                                          .uploadedFileUrl_uploadDataRy7 ==
-                                                                      null ||
-                                                                  _model.uploadedFileUrl_uploadDataRy7 ==
-                                                                      ''
-                                                              ? widget!
-                                                                  .company
-                                                                  ?.photo
-                                                              : _model.img,
-                                                          'user_profissional':
-                                                              widget!.idUser,
+                                                              .atividadePrincipalValue,
+                                                          'photo': _model.img,
                                                           'activated': true,
+                                                          'user_profissional':
+                                                              widget.idUser,
                                                           'user_created':
                                                               currentUserUid,
-                                                          'address': widget!
+                                                          'address': widget
                                                                           .endereco !=
                                                                       null &&
-                                                                  widget!.endereco !=
+                                                                  widget.endereco !=
                                                                       ''
-                                                              ? widget!
-                                                                  .endereco
-                                                              : '${_model.placePickerValue.address}${_model.placePickerValue.latLng?.toString()}',
-                                                        },
-                                                        matchingRows:
-                                                            (rows) =>
-                                                                rows.eqOrNull(
-                                                          'id',
-                                                          widget!.company?.id,
-                                                        ),
-                                                      );
-                                                      await UserProfissionaisTable()
-                                                          .update(
-                                                        data: {
-                                                          'company': widget!.company?.id,
-                                                        },
-                                                        matchingRows:
-                                                            (rows) =>
-                                                                rows.eqOrNull(
-                                                          'id',
-                                                          widget!.idUser,
-                                                        ),
-                                                      );
-                                                    }
+                                                              ? widget.endereco
+                                                              : '${_model.placePickerValue.address}${_model.placePickerValue.latLng.toString()}',
+                                                        });
+                                                        await UserProfissionaisTable()
+                                                            .update(
+                                                          data: {
+                                                            'company': _model
+                                                                .idCompany?.id,
+                                                          },
+                                                          matchingRows:
+                                                              (rows) =>
+                                                                  rows.eqOrNull(
+                                                            'id',
+                                                            widget.idUser,
+                                                          ),
+                                                        );
+                                                      } else {
+                                                        await CompanyTable()
+                                                            .update(
+                                                          data: {
+                                                            'name': _model.nomeEmpresaTextController
+                                                                            .text ==
+                                                                        ''
+                                                                ? widget
+                                                                    .company
+                                                                    ?.name
+                                                                : _model
+                                                                    .nomeEmpresaTextController
+                                                                    .text,
+                                                            'phone':
+                                                                widget.phone,
+                                                            'main_activity': _model
+                                                                        .atividadePrincipalValue ==
+                                                                    null
+                                                                ? widget
+                                                                    .company
+                                                                    ?.mainActivity
+                                                                : _model
+                                                                    .atividadePrincipalValue,
+                                                            'photo': _model.uploadedFileUrl_uploadDataRy7 ==
+                                                                        ''
+                                                                ? widget
+                                                                    .company
+                                                                    ?.phone
+                                                                : _model.img,
+                                                            'user_profissional':
+                                                                widget.idUser,
+                                                            'activated': true,
+                                                            'user_created':
+                                                                currentUserUid,
+                                                            'address': widget
+                                                                            .endereco !=
+                                                                        null &&
+                                                                    widget.endereco !=
+                                                                        ''
+                                                                ? widget
+                                                                    .endereco
+                                                                : '${_model.placePickerValue.address}${_model.placePickerValue.latLng.toString()}',
+                                                          },
+                                                          matchingRows:
+                                                              (rows) =>
+                                                                  rows.eqOrNull(
+                                                            'id',
+                                                            widget.company?.id,
+                                                          ),
+                                                        );
+                                                        await UserProfissionaisTable()
+                                                            .update(
+                                                          data: {
+                                                            'company': _model
+                                                                .idComapany2
+                                                                ?.firstOrNull
+                                                                ?.id,
+                                                          },
+                                                          matchingRows:
+                                                              (rows) =>
+                                                                  rows.eqOrNull(
+                                                            'id',
+                                                            widget.idUser,
+                                                          ),
+                                                        );
+                                                      }
 
-                                                    context.pushNamed(
-                                                      ComoFuncionaWidget
-                                                          .routeName,
-                                                      extra: <String,
-                                                          dynamic>{
-                                                        kTransitionInfoKey:
-                                                            TransitionInfo(
-                                                          hasTransition: true,
-                                                          transitionType:
-                                                              PageTransitionType
-                                                                  .fade,
-                                                          duration: Duration(
-                                                              milliseconds:
-                                                                  0),
-                                                        ),
-                                                      },
-                                                    );
-                                                  } catch (e) {
-                                                    print('Erro ao salvar empresa: $e');
-                                                    // Aqui você pode adicionar um ScaffoldMessenger para mostrar erro ao usuário
-                                                    ScaffoldMessenger.of(context).showSnackBar(
-                                                      SnackBar(
-                                                        content: Text('Erro ao salvar empresa. Tente novamente.'),
-                                                        backgroundColor: Colors.red,
-                                                      ),
-                                                    );
-                                                  }
-                                                },
-                                              ),
-                                            ),
+                                                      context.pushNamed(
+                                                        ComoFuncionaWidget
+                                                            .routeName,
+                                                        extra: <String,
+                                                            dynamic>{
+                                                          kTransitionInfoKey:
+                                                              TransitionInfo(
+                                                            hasTransition: true,
+                                                            transitionType:
+                                                                PageTransitionType
+                                                                    .fade,
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    0),
+                                                          ),
+                                                        },
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                              );
+                                            },
                                           );
-                                        },
-                                      );
+                                        }
+                                      }
+                                    } else {
+                                      _model.erroImagem = true;
+                                      safeSetState(() {});
                                     }
+
+                                    if (_shouldSetState) safeSetState(() {});
                                   },
                                   text: 'Salvar',
                                   options: FFButtonOptions(
@@ -1310,4 +1272,3 @@ class _DadosEmpresaWidgetState extends State<DadosEmpresaWidget> {
     );
   }
 }
-

@@ -2,9 +2,7 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -144,7 +142,7 @@ class _AtividadeExisteWidgetState extends State<AtividadeExisteWidget> {
                     ),
                     TextSpan(
                       text: valueOrDefault<String>(
-                        widget!.atividade?.name,
+                        widget.atividade?.name,
                         'Atividade',
                       ),
                       style: TextStyle(
@@ -223,16 +221,16 @@ class _AtividadeExisteWidgetState extends State<AtividadeExisteWidget> {
                     FFAppState().escolhaAtividadeLista =
                         FFAppState().nomeTexfield;
                     FFAppState().update(() {});
-                    if (widget!.perfilEmpresa) {
+                    if (widget.perfilEmpresa) {
                       context.pushNamed(
                         PerfilEmpresaWidget.routeName,
                         queryParameters: {
                           'company': serializeParam(
-                            widget!.company,
+                            widget.company,
                             ParamType.SupabaseRow,
                           ),
                           'atividade': serializeParam(
-                            widget!.atividade,
+                            widget.atividade,
                             ParamType.SupabaseRow,
                           ),
                           'categoria': serializeParam(
@@ -253,35 +251,35 @@ class _AtividadeExisteWidgetState extends State<AtividadeExisteWidget> {
                         DadosEmpresaWidget.routeName,
                         queryParameters: {
                           'company': serializeParam(
-                            widget!.company,
+                            widget.company,
                             ParamType.SupabaseRow,
                           ),
                           'criar': serializeParam(
-                            widget!.criar,
+                            widget.criar,
                             ParamType.bool,
                           ),
                           'phone': serializeParam(
-                            widget!.phone,
+                            widget.phone,
                             ParamType.String,
                           ),
                           'idUser': serializeParam(
-                            widget!.idUser,
+                            widget.idUser,
                             ParamType.int,
                           ),
                           'atividade': serializeParam(
-                            widget!.atividade,
+                            widget.atividade,
                             ParamType.SupabaseRow,
                           ),
                           'endereco': serializeParam(
-                            widget!.endereco,
+                            widget.endereco,
                             ParamType.String,
                           ),
                           'nomeEmpresa': serializeParam(
-                            widget!.nomeEmpresa,
+                            widget.nomeEmpresa,
                             ParamType.String,
                           ),
                           'img': serializeParam(
-                            widget!.img,
+                            widget.img,
                             ParamType.String,
                           ),
                         }.withoutNulls,

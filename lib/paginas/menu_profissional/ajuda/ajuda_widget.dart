@@ -2,12 +2,9 @@ import '/componentes/como_funciona2/como_funciona2_widget.dart';
 import '/componentes/falar_com_suporte/falar_com_suporte_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'ajuda_model.dart';
 export 'ajuda_model.dart';
 

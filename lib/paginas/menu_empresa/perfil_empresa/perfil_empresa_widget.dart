@@ -7,22 +7,16 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/flutter_flow/place.dart';
 import '/flutter_flow/upload_data.dart';
-import 'dart:io';
-import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:provider/provider.dart';
 import 'perfil_empresa_model.dart';
 export 'perfil_empresa_model.dart';
 
@@ -57,18 +51,18 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (widget!.categoria == 3) {
+      if (widget.categoria == 3) {
         _model.categorias = 3;
         safeSetState(() {});
       }
     });
 
     _model.textFieldEmpresaTextController ??=
-        TextEditingController(text: widget!.company?.name);
+        TextEditingController(text: widget.company?.name);
     _model.textFieldEmpresaFocusNode ??= FocusNode();
 
     _model.textFieldApresentacaoTextController ??=
-        TextEditingController(text: widget!.company?.presentation);
+        TextEditingController(text: widget.company?.presentation);
     _model.textFieldApresentacaoFocusNode ??= FocusNode();
 
     _model.textFieldTelefoneTextController1 ??= TextEditingController();
@@ -270,13 +264,11 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                             fit: BoxFit.cover,
                                             image: CachedNetworkImageProvider(
                                               _model.uploadedFileUrl_uploadData1 !=
-                                                          null &&
-                                                      _model.uploadedFileUrl_uploadData1 !=
                                                           ''
                                                   ? _model
                                                       .uploadedFileUrl_uploadData1
                                                   : valueOrDefault<String>(
-                                                      widget!
+                                                      widget
                                                           .company?.imageCover,
                                                       'https://i0.wp.com/espaferro.com.br/wp-content/uploads/2024/06/placeholder.png?ssl=1',
                                                     ),
@@ -370,7 +362,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                               matchingRows: (rows) =>
                                                   rows.eqOrNull(
                                                 'id',
-                                                widget!.company?.id,
+                                                widget.company?.id,
                                               ),
                                             );
                                           },
@@ -450,12 +442,10 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                             valueOrDefault<
                                                                 String>(
                                                               _model.uploadedFileUrl_uploadDataTv7 !=
-                                                                          null &&
-                                                                      _model.uploadedFileUrl_uploadDataTv7 !=
                                                                           ''
                                                                   ? _model
                                                                       .uploadedFileUrl_uploadDataTv7
-                                                                  : widget!
+                                                                  : widget
                                                                       .company
                                                                       ?.photo,
                                                               'https://s3.eu-central-1.amazonaws.com/uploads.mangoweb.org/shared-prod/visegradfund.org/uploads/2021/08/placeholder-male.jpg',
@@ -566,7 +556,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                               (rows) =>
                                                                   rows.eqOrNull(
                                                             'id',
-                                                            widget!.company?.id,
+                                                            widget.company?.id,
                                                           ),
                                                         );
                                                       },
@@ -676,7 +666,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                             children: [
                                               Text(
                                                 valueOrDefault<String>(
-                                                  widget!.company?.name,
+                                                  widget.company?.name,
                                                   'Nome Empresa',
                                                 ),
                                                 style: FlutterFlowTheme.of(
@@ -1102,7 +1092,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                               (rows) =>
                                                                   rows.eqOrNull(
                                                             'id',
-                                                            widget!.company?.id,
+                                                            widget.company?.id,
                                                           ),
                                                         );
                                                         _model.categorias = 0;
@@ -1529,7 +1519,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                         matchingRows: (rows) =>
                                                             rows.eqOrNull(
                                                           'id',
-                                                          widget!.company?.id,
+                                                          widget.company?.id,
                                                         ),
                                                       );
                                                       _model.categorias = 0;
@@ -1605,7 +1595,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                             0.0, 0.0, 0.0, 15.0),
                                         child: Text(
                                           valueOrDefault<String>(
-                                            widget!.company?.presentation,
+                                            widget.company?.presentation,
                                             'Fale um pouco sobre sua empresa ou serviço.',
                                           ),
                                           style: FlutterFlowTheme.of(context)
@@ -1878,8 +1868,8 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                     ),
                                                 hintText:
                                                     valueOrDefault<String>(
-                                                  widget!.atividade != null
-                                                      ? widget!.atividade?.name
+                                                  widget.atividade != null
+                                                      ? widget.atividade?.name
                                                       : 'Atividades',
                                                   'Atividades',
                                                 ),
@@ -1941,7 +1931,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                         queryParameters: {
                                                           'company':
                                                               serializeParam(
-                                                            widget!.company,
+                                                            widget.company,
                                                             ParamType
                                                                 .SupabaseRow,
                                                           ),
@@ -2221,7 +2211,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                         matchingRows: (rows) =>
                                                             rows.eqOrNull(
                                                           'id',
-                                                          widget!.company?.id,
+                                                          widget.company?.id,
                                                         ),
                                                       );
                                                       _model.categorias = 0;
@@ -2362,7 +2352,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                                   ?.name
                                                               : valueOrDefault<
                                                                   String>(
-                                                                  widget!
+                                                                  widget
                                                                       .atividade
                                                                       ?.name,
                                                                   'nome',
@@ -7246,11 +7236,10 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                                 children: [
                                                                   Expanded(
                                                                     child: Text(
-                                                                      functions.validarEndereco(_model.placePickerValue.address != null &&
-                                                                              _model.placePickerValue.address !=
+                                                                      functions.validarEndereco(_model.placePickerValue.address !=
                                                                                   ''
-                                                                          ? '${_model.placePickerValue.address}${_model.placePickerValue.latLng?.toString()}'
-                                                                          : widget!
+                                                                          ? '${_model.placePickerValue.address}${_model.placePickerValue.latLng.toString()}'
+                                                                          : widget
                                                                               .company!
                                                                               .address!),
                                                                       style: FlutterFlowTheme.of(
@@ -7262,7 +7251,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                                               fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
                                                                               fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                             ),
-                                                                            color: functions.validarEndereco('${_model.placePickerValue.address}${_model.placePickerValue.latLng?.toString()}') == 'Endereço incompleto. Por favor, selecione um endereço válido contendo: Rua, número, bairro, cidade, estado.'
+                                                                            color: functions.validarEndereco('${_model.placePickerValue.address}${_model.placePickerValue.latLng.toString()}') == 'Endereço incompleto. Por favor, selecione um endereço válido contendo: Rua, número, bairro, cidade, estado.'
                                                                                 ? FlutterFlowTheme.of(context).error
                                                                                 : FlutterFlowTheme.of(context).primaryText,
                                                                             letterSpacing:
@@ -7630,15 +7619,11 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                         onPressed: () async {
                                                           var _shouldSetState =
                                                               false;
-                                                          if (functions.validarEndereco(_model
-                                                                              .placePickerValue
-                                                                              .address !=
-                                                                          null &&
-                                                                      _model.placePickerValue
+                                                          if (functions.validarEndereco(_model.placePickerValue
                                                                               .address !=
                                                                           ''
-                                                                  ? '${_model.placePickerValue.address}${_model.placePickerValue.latLng?.toString()}'
-                                                                  : widget!
+                                                                  ? '${_model.placePickerValue.address}${_model.placePickerValue.latLng.toString()}'
+                                                                  : widget
                                                                       .company!
                                                                       .address!) ==
                                                               'Selecione um endereço.') {
@@ -7646,15 +7631,11 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                               safeSetState(
                                                                   () {});
                                                             return;
-                                                          } else if (functions.validarEndereco(_model
-                                                                              .placePickerValue
-                                                                              .address !=
-                                                                          null &&
-                                                                      _model.placePickerValue
+                                                          } else if (functions.validarEndereco(_model.placePickerValue
                                                                               .address !=
                                                                           ''
-                                                                  ? '${_model.placePickerValue.address}${_model.placePickerValue.latLng?.toString()}'
-                                                                  : widget!
+                                                                  ? '${_model.placePickerValue.address}${_model.placePickerValue.latLng.toString()}'
+                                                                  : widget
                                                                       .company!
                                                                       .address!) ==
                                                               'Endereço incompleto. Por favor, selecione um endereço válido contendo: Rua, número, bairro, cidade, estado.') {
@@ -7668,13 +7649,13 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                               .update(
                                                             data: {
                                                               'address':
-                                                                  '${_model.placePickerValue.address}${_model.placePickerValue.latLng?.toString()}',
+                                                                  '${_model.placePickerValue.address}${_model.placePickerValue.latLng.toString()}',
                                                             },
                                                             matchingRows:
                                                                 (rows) => rows
                                                                     .eqOrNull(
                                                               'id',
-                                                              widget!
+                                                              widget
                                                                   .company?.id,
                                                             ),
                                                           );
@@ -7777,7 +7758,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                       .querySingleRow(
                                                     queryFn: (q) => q.eqOrNull(
                                                       'id',
-                                                      widget!.company?.id,
+                                                      widget.company?.id,
                                                     ),
                                                   ),
                                                   builder: (context, snapshot) {

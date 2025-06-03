@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
-import 'dart:ui';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
@@ -15,7 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 import 'dados_pessoais_model.dart';
 export 'dados_pessoais_model.dart';
@@ -56,10 +54,10 @@ class _DadosPessoaisWidgetState extends State<DadosPessoaisWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       safeSetState(() {
-        _model.nomeTextController?.text = widget!.nome;
+        _model.nomeTextController?.text = widget.nome;
       });
       safeSetState(() {
-        _model.telefoneTextController?.text = widget!.phone!;
+        _model.telefoneTextController?.text = widget.phone!;
         _model.telefoneMask.updateMask(
           newValue: TextEditingValue(
             text: _model.telefoneTextController!.text,
@@ -68,7 +66,7 @@ class _DadosPessoaisWidgetState extends State<DadosPessoaisWidget> {
       });
     });
 
-    _model.nomeTextController ??= TextEditingController(text: widget!.nome);
+    _model.nomeTextController ??= TextEditingController(text: widget.nome);
     _model.nomeFocusNode ??= FocusNode();
 
     _model.telefoneTextController ??= TextEditingController();
@@ -213,11 +211,9 @@ class _DadosPessoaisWidgetState extends State<DadosPessoaisWidget> {
                             child: Builder(
                               builder: (context) {
                                 if ((_model.uploadedFileUrl_uploadData0w8 !=
-                                            null &&
-                                        _model.uploadedFileUrl_uploadData0w8 !=
                                             '') ||
-                                    (widget!.urlImage != null &&
-                                        widget!.urlImage != '')) {
+                                    (widget.urlImage != null &&
+                                        widget.urlImage != '')) {
                                   return Container(
                                     width: 100.0,
                                     height: 100.0,
@@ -226,9 +222,9 @@ class _DadosPessoaisWidgetState extends State<DadosPessoaisWidget> {
                                       image: DecorationImage(
                                         fit: BoxFit.cover,
                                         image: CachedNetworkImageProvider(
-                                          widget!.urlImage != null &&
-                                                  widget!.urlImage != ''
-                                              ? widget!.urlImage!
+                                          widget.urlImage != null &&
+                                                  widget.urlImage != ''
+                                              ? widget.urlImage!
                                               : _model
                                                   .uploadedFileUrl_uploadData0w8,
                                         ),
@@ -238,6 +234,42 @@ class _DadosPessoaisWidgetState extends State<DadosPessoaisWidget> {
                                         color: FlutterFlowTheme.of(context)
                                             .primary,
                                         width: 1.0,
+                                      ),
+                                    ),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    child: Visibility(
+                                      visible:
+                                          (_model.uploadedFileUrl_uploadData0w8 ==
+                                                      '') &&
+                                              (widget.urlImage == null ||
+                                                  widget.urlImage == ''),
+                                      child: Text(
+                                        valueOrDefault<String>(
+                                          functions.iniciaisName(
+                                              _model.nomeTextController.text),
+                                          '-',
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              font: GoogleFonts.poppins(
+                                                fontWeight: FontWeight.w600,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              fontSize: 32.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w600,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
                                       ),
                                     ),
                                   );
@@ -254,51 +286,21 @@ class _DadosPessoaisWidgetState extends State<DadosPessoaisWidget> {
                                         width: 1.0,
                                       ),
                                     ),
-                                    alignment: AlignmentDirectional(0.0, 0.0),
-                                    child: _model.nomeTextController.text.trim().isEmpty
-                                        ? Padding(
-                                            padding: EdgeInsets.all(20.0),
-                                            child: Container(
-                                              width: 100.0,
-                                              height: 100.0,
-                                              clipBehavior: Clip.antiAlias,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                              ),
-                                              child: Image.asset(
-                                                'assets/images/user.png',
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          )
-                                        : Text(
-                                            valueOrDefault<String>(
-                                              functions.iniciaisName(
-                                                  _model.nomeTextController.text),
-                                              '-',
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  font: GoogleFonts.poppins(
-                                                    fontWeight: FontWeight.w600,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(context)
-                                                            .bodyMedium
-                                                            .fontStyle,
-                                                  ),
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .primaryText,
-                                                  fontSize: 32.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(context)
-                                                          .bodyMedium
-                                                          .fontStyle,
-                                                ),
-                                          ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(20.0),
+                                      child: Container(
+                                        width: 100.0,
+                                        height: 100.0,
+                                        clipBehavior: Clip.antiAlias,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Image.asset(
+                                          'assets/images/user.png',
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
                                   );
                                 }
                               },
@@ -654,7 +656,7 @@ class _DadosPessoaisWidgetState extends State<DadosPessoaisWidget> {
                                 ParamType.String,
                               ),
                               'email': serializeParam(
-                                widget!.email,
+                                widget.email,
                                 ParamType.String,
                               ),
                               'imagem': serializeParam(

@@ -3,13 +3,10 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
-import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'confirma_empresa_model.dart';
 export 'confirma_empresa_model.dart';
 
@@ -153,7 +150,7 @@ class _ConfirmaEmpresaWidgetState extends State<ConfirmaEmpresaWidget> {
                             Builder(
                               builder: (context) {
                                 if (valueOrDefault<bool>(
-                                  widget!.img == null || widget!.img == '',
+                                  widget.img == null || widget.img == '',
                                   false,
                                 )) {
                                   return Container(
@@ -204,7 +201,7 @@ class _ConfirmaEmpresaWidgetState extends State<ConfirmaEmpresaWidget> {
                                           Duration(milliseconds: 500),
                                       fadeOutDuration:
                                           Duration(milliseconds: 500),
-                                      imageUrl: widget!.img!,
+                                      imageUrl: widget.img!,
                                       fit: BoxFit.cover,
                                     ),
                                   );
@@ -226,7 +223,7 @@ class _ConfirmaEmpresaWidgetState extends State<ConfirmaEmpresaWidget> {
                                           Expanded(
                                             child: Text(
                                               valueOrDefault<String>(
-                                                widget!.nome,
+                                                widget.nome,
                                                 '-',
                                               ),
                                               style:
@@ -260,7 +257,7 @@ class _ConfirmaEmpresaWidgetState extends State<ConfirmaEmpresaWidget> {
                                         future: ActivityTable().querySingleRow(
                                           queryFn: (q) => q.eqOrNull(
                                             'id',
-                                            widget!.atividadeId,
+                                            widget.atividadeId,
                                           ),
                                         ),
                                         builder: (context, snapshot) {
@@ -359,7 +356,7 @@ class _ConfirmaEmpresaWidgetState extends State<ConfirmaEmpresaWidget> {
                                               ),
                                               Text(
                                                 valueOrDefault<String>(
-                                                  widget!.like,
+                                                  widget.like,
                                                   '0',
                                                 ),
                                                 style: FlutterFlowTheme.of(
@@ -402,7 +399,7 @@ class _ConfirmaEmpresaWidgetState extends State<ConfirmaEmpresaWidget> {
                                             ),
                                             Text(
                                               valueOrDefault<String>(
-                                                widget!.avaliacao,
+                                                widget.avaliacao,
                                                 '0',
                                               ),
                                               style: FlutterFlowTheme.of(
@@ -518,13 +515,11 @@ class _ConfirmaEmpresaWidgetState extends State<ConfirmaEmpresaWidget> {
                   ),
                   FFButtonWidget(
                     onPressed: () async {
-                      try {
-                        await widget.acao?.call();
-                        Navigator.pop(context);
-                      } catch (e) {
-                        // Em caso de erro, não fecha o modal para o usuário ver o problema
-                        print('Erro ao confirmar empresa: $e');
-                      }
+                      unawaited(
+                        () async {
+                          await widget.acao?.call();
+                        }(),
+                      );
                     },
                     text: 'Confirmar',
                     options: FFButtonOptions(

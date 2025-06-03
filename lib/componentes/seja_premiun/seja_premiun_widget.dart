@@ -1,10 +1,8 @@
 import '/componentes/plan_pro/plan_pro_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'seja_premiun_model.dart';
 export 'seja_premiun_model.dart';
 
@@ -70,7 +68,7 @@ class _SejaPremiunWidgetState extends State<SejaPremiunWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 5.0),
               child: Text(
                 valueOrDefault<String>(
-                  widget!.texto,
+                  widget.texto,
                   'Localidades',
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -122,7 +120,7 @@ class _SejaPremiunWidgetState extends State<SejaPremiunWidget> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.network(
-                      widget!.image!,
+                      widget.image!,
                       width: double.infinity,
                       height: 169.0,
                       fit: BoxFit.cover,
@@ -146,7 +144,7 @@ class _SejaPremiunWidgetState extends State<SejaPremiunWidget> {
                         children: [
                           Text(
                             valueOrDefault<String>(
-                              widget!.texto2,
+                              widget.texto2,
                               'Localidades nos últimos 90 dias',
                             ),
                             textAlign: TextAlign.center,

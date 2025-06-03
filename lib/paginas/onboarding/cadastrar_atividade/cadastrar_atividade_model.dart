@@ -1,19 +1,9 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
-import '/componentes/atividade_aprovada/atividade_aprovada_widget.dart';
-import '/componentes/atividade_existe/atividade_existe_widget.dart';
-import '/componentes/atividade_nao_permitida/atividade_nao_permitida_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'cadastrar_atividade_widget.dart' show CadastrarAtividadeWidget;
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class CadastrarAtividadeModel
     extends FlutterFlowModel<CadastrarAtividadeWidget> {

@@ -3,16 +3,12 @@ import '/componentes/empresa_nao_cadastrada/empresa_nao_cadastrada_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:provider/provider.dart';
 import 'buscar_empresa_model.dart';
 export 'buscar_empresa_model.dart';
 
@@ -46,7 +42,7 @@ class _BuscarEmpresaWidgetState extends State<BuscarEmpresaWidget> {
     _model = createModel(context, () => BuscarEmpresaModel());
 
     _model.textFieldTelefoneTextController ??=
-        TextEditingController(text: functions.removeMais55(widget!.telefone!));
+        TextEditingController(text: functions.removeMais55(widget.telefone!));
     _model.textFieldTelefoneFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -65,7 +61,7 @@ class _BuscarEmpresaWidgetState extends State<BuscarEmpresaWidget> {
       future: CompanyTable().querySingleRow(
         queryFn: (q) => q.eqOrNull(
           'phone',
-          '55${widget!.telefone}',
+          '55${widget.telefone}',
         ),
       ),
       builder: (context, snapshot) {
@@ -112,7 +108,7 @@ class _BuscarEmpresaWidgetState extends State<BuscarEmpresaWidget> {
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        if (widget!.voltar)
+                        if (widget.voltar)
                           InkWell(
                             splashColor: Colors.transparent,
                             focusColor: Colors.transparent,
@@ -446,7 +442,7 @@ class _BuscarEmpresaWidgetState extends State<BuscarEmpresaWidget> {
                           Stack(
                             children: [
                               if (buscarEmpresaCompanyRow?.phone ==
-                                  '55${widget!.telefone}')
+                                  '55${widget.telefone}')
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 20.0),
@@ -1340,7 +1336,7 @@ class _BuscarEmpresaWidgetState extends State<BuscarEmpresaWidget> {
                                                         ParamType.SupabaseRow,
                                                       ),
                                                       'idUser': serializeParam(
-                                                        widget!.idUser,
+                                                        widget.idUser,
                                                         ParamType.int,
                                                       ),
                                                       'criar': serializeParam(
@@ -1354,7 +1350,7 @@ class _BuscarEmpresaWidgetState extends State<BuscarEmpresaWidget> {
                                                         ParamType.SupabaseRow,
                                                       ),
                                                       'phone': serializeParam(
-                                                        '55${widget!.telefone}',
+                                                        '55${widget.telefone}',
                                                         ParamType.String,
                                                       ),
                                                       'nomeEmpresa':
@@ -1491,11 +1487,8 @@ class _BuscarEmpresaWidgetState extends State<BuscarEmpresaWidget> {
                                   ),
                                 ),
                               if ((buscarEmpresaCompanyRow?.phone !=
-                                      '55${widget!.telefone}') &&
+                                      '55${widget.telefone}') &&
                                   (_model.textFieldTelefoneTextController
-                                              .text !=
-                                          null &&
-                                      _model.textFieldTelefoneTextController
                                               .text !=
                                           '') &&
                                   !_model.loading)
@@ -1505,13 +1498,13 @@ class _BuscarEmpresaWidgetState extends State<BuscarEmpresaWidget> {
                                   decoration: BoxDecoration(),
                                   child: Visibility(
                                     visible: buscarEmpresaCompanyRow?.phone !=
-                                        '55${widget!.telefone}',
+                                        '55${widget.telefone}',
                                     child: wrapWithModel(
                                       model: _model.empresaNaoCadastradaModel,
                                       updateCallback: () => safeSetState(() {}),
                                       child: EmpresaNaoCadastradaWidget(
-                                        idUser: widget!.idUser,
-                                        phone: widget!.telefone!,
+                                        idUser: widget.idUser,
+                                        phone: widget.telefone!,
                                       ),
                                     ),
                                   ),

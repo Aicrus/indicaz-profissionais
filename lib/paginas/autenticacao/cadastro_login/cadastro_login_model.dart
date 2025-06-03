@@ -1,18 +1,9 @@
-import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/componentes/logins_google_apple/logins_google_apple_widget.dart';
-import '/componentes/termos_condicoes_email/termos_condicoes_email_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
 import 'cadastro_login_widget.dart' show CadastroLoginWidget;
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class CadastroLoginModel extends FlutterFlowModel<CadastroLoginWidget> {
   ///  Local state fields for this page.

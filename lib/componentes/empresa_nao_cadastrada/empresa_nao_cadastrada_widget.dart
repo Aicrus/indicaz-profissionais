@@ -1,11 +1,9 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'empresa_nao_cadastrada_model.dart';
 export 'empresa_nao_cadastrada_model.dart';
 
@@ -115,11 +113,11 @@ class _EmpresaNaoCadastradaWidgetState
                             ParamType.bool,
                           ),
                           'idUser': serializeParam(
-                            widget!.idUser,
+                            widget.idUser,
                             ParamType.int,
                           ),
                           'phone': serializeParam(
-                            widget!.phone,
+                            widget.phone,
                             ParamType.String,
                           ),
                         }.withoutNulls,

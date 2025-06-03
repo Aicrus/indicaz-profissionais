@@ -1,11 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'atividade_nao_permitida_model.dart';
 export 'atividade_nao_permitida_model.dart';
 
@@ -122,7 +119,7 @@ class _AtividadeNaoPermitidaWidgetState
                     ),
                     TextSpan(
                       text: valueOrDefault<String>(
-                        widget!.detalhes,
+                        widget.detalhes,
                         'Pintor ',
                       ),
                       style: TextStyle(

@@ -1,18 +1,14 @@
-import '/auth/base_auth_user_provider.dart';
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
 import '/componentes/erro/erro_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import '/index.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -128,7 +124,7 @@ class _ValidarTelefoneWidgetState extends State<ValidarTelefoneWidget> {
                       ),
                       TextSpan(
                         text: valueOrDefault<String>(
-                          widget!.numero,
+                          widget.numero,
                           '-',
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -230,13 +226,13 @@ class _ValidarTelefoneWidgetState extends State<ValidarTelefoneWidget> {
                     onChanged: (_) {},
                     onCompleted: (_) async {
                       _model.userProfissional2 = await actions.nomeSobrenome(
-                        widget!.nomeCompleto!,
+                        widget.nomeCompleto!,
                       );
                       if (_model.pinCodeController!.text == FFAppState().code) {
                         if (loggedIn) {
                           await UserProfissionaisTable().update(
                             data: {
-                              'email': widget!.email,
+                              'email': widget.email,
                               'nome': getJsonField(
                                 _model.userProfissional2,
                                 r'''$.nome''',
@@ -246,13 +242,13 @@ class _ValidarTelefoneWidgetState extends State<ValidarTelefoneWidget> {
                                 r'''$.sobrenome''',
                               ).toString(),
                               'phone': functions
-                                  .formataPhoneSupabase(widget!.numero!),
-                              'foto': widget!.imagem,
+                                  .formataPhoneSupabase(widget.numero!),
+                              'foto': widget.imagem,
                               'is_onbarding': true,
                             },
                             matchingRows: (rows) => rows.eqOrNull(
                               'email',
-                              widget!.email,
+                              widget.email,
                             ),
                           );
 
@@ -261,7 +257,7 @@ class _ValidarTelefoneWidgetState extends State<ValidarTelefoneWidget> {
                             context.mounted,
                             queryParameters: {
                               'telefone': serializeParam(
-                                widget!.numero,
+                                widget.numero,
                                 ParamType.String,
                               ),
                               'idUser': serializeParam(
@@ -292,7 +288,7 @@ class _ValidarTelefoneWidgetState extends State<ValidarTelefoneWidget> {
 
                           final user = await authManager.createAccountWithEmail(
                             context,
-                            widget!.email!,
+                            widget.email!,
                             FFAppState().pass,
                           );
                           if (user == null) {
@@ -301,7 +297,7 @@ class _ValidarTelefoneWidgetState extends State<ValidarTelefoneWidget> {
 
                           await UserProfissionaisTable().update(
                             data: {
-                              'email': widget!.email,
+                              'email': widget.email,
                               'nome': getJsonField(
                                 _model.userProfissional2,
                                 r'''$.nome''',
@@ -311,13 +307,13 @@ class _ValidarTelefoneWidgetState extends State<ValidarTelefoneWidget> {
                                 r'''$.sobrenome''',
                               ).toString(),
                               'phone': functions
-                                  .formataPhoneSupabase(widget!.numero!),
-                              'foto': widget!.imagem,
+                                  .formataPhoneSupabase(widget.numero!),
+                              'foto': widget.imagem,
                               'is_onbarding': true,
                             },
                             matchingRows: (rows) => rows.eqOrNull(
                               'email',
-                              widget!.email,
+                              widget.email,
                             ),
                           );
 
@@ -326,7 +322,7 @@ class _ValidarTelefoneWidgetState extends State<ValidarTelefoneWidget> {
                             context.mounted,
                             queryParameters: {
                               'telefone': serializeParam(
-                                widget!.numero,
+                                widget.numero,
                                 ParamType.String,
                               ),
                               'idUser': serializeParam(
@@ -409,7 +405,7 @@ class _ValidarTelefoneWidgetState extends State<ValidarTelefoneWidget> {
                               await TwilioWhatsAppCodeProducaoCall.call(
                             code: '{\"1\":\"${FFAppState().code}\"}',
                             phone:
-                                'whatsapp:${functions.formataPhoneAPI('+55${widget!.numero}')}',
+                                'whatsapp:${functions.formataPhoneAPI('+55${widget.numero}')}',
                           );
 
                           safeSetState(() {
@@ -420,11 +416,11 @@ class _ValidarTelefoneWidgetState extends State<ValidarTelefoneWidget> {
                             DadosPessoaisWidget.routeName,
                             queryParameters: {
                               'nome': serializeParam(
-                                widget!.nomeCompleto,
+                                widget.nomeCompleto,
                                 ParamType.String,
                               ),
                               'urlImage': serializeParam(
-                                widget!.imagem,
+                                widget.imagem,
                                 ParamType.String,
                               ),
                             }.withoutNulls,
@@ -468,19 +464,19 @@ class _ValidarTelefoneWidgetState extends State<ValidarTelefoneWidget> {
                     DadosPessoaisWidget.routeName,
                     queryParameters: {
                       'nome': serializeParam(
-                        widget!.nomeCompleto,
+                        widget.nomeCompleto,
                         ParamType.String,
                       ),
                       'urlImage': serializeParam(
-                        widget!.imagem,
+                        widget.imagem,
                         ParamType.String,
                       ),
                       'phone': serializeParam(
-                        widget!.numero,
+                        widget.numero,
                         ParamType.String,
                       ),
                       'email': serializeParam(
-                        widget!.email,
+                        widget.email,
                         ParamType.String,
                       ),
                     }.withoutNulls,

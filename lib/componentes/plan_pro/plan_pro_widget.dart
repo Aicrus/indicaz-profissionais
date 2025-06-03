@@ -1,10 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'plan_pro_model.dart';
 export 'plan_pro_model.dart';
 
@@ -50,7 +48,7 @@ class _PlanProWidgetState extends State<PlanProWidget> {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        if (widget!.escolha == 1)
+        if (widget.escolha == 1)
           Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -107,7 +105,7 @@ class _PlanProWidgetState extends State<PlanProWidget> {
               ),
             ].divide(SizedBox(height: 5.0)),
           ),
-        if (widget!.escolha == 2)
+        if (widget.escolha == 2)
           Column(
             mainAxisSize: MainAxisSize.max,
             children: [

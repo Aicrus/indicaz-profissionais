@@ -2,13 +2,10 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'atividade_aprovada_model.dart';
 export 'atividade_aprovada_model.dart';
 
@@ -143,7 +140,7 @@ class _AtividadeAprovadaWidgetState extends State<AtividadeAprovadaWidget> {
                     ),
                     TextSpan(
                       text: valueOrDefault<String>(
-                        widget!.detalhes,
+                        widget.detalhes,
                         'Pintor ',
                       ),
                       style: TextStyle(
@@ -220,15 +217,15 @@ class _AtividadeAprovadaWidgetState extends State<AtividadeAprovadaWidget> {
                 FFButtonWidget(
                   onPressed: () async {
                     _model.atividadeCadastrada = await ActivityTable().insert({
-                      'name': widget!.detalhes,
+                      'name': widget.detalhes,
                       'status': true,
                     });
-                    if (widget!.perfilEmpresa) {
+                    if (widget.perfilEmpresa) {
                       context.pushNamed(
                         PerfilEmpresaWidget.routeName,
                         queryParameters: {
                           'company': serializeParam(
-                            widget!.company,
+                            widget.company,
                             ParamType.SupabaseRow,
                           ),
                           'atividade': serializeParam(
@@ -246,15 +243,15 @@ class _AtividadeAprovadaWidgetState extends State<AtividadeAprovadaWidget> {
                         DadosEmpresaWidget.routeName,
                         queryParameters: {
                           'company': serializeParam(
-                            widget!.company,
+                            widget.company,
                             ParamType.SupabaseRow,
                           ),
                           'criar': serializeParam(
-                            widget!.criar,
+                            widget.criar,
                             ParamType.bool,
                           ),
                           'phone': serializeParam(
-                            widget!.phone,
+                            widget.phone,
                             ParamType.String,
                           ),
                           'atividade': serializeParam(
@@ -262,19 +259,19 @@ class _AtividadeAprovadaWidgetState extends State<AtividadeAprovadaWidget> {
                             ParamType.SupabaseRow,
                           ),
                           'idUser': serializeParam(
-                            widget!.idUser,
+                            widget.idUser,
                             ParamType.int,
                           ),
                           'endereco': serializeParam(
-                            widget!.endereco,
+                            widget.endereco,
                             ParamType.String,
                           ),
                           'nomeEmpresa': serializeParam(
-                            widget!.nomeEmpresa,
+                            widget.nomeEmpresa,
                             ParamType.String,
                           ),
                           'img': serializeParam(
-                            widget!.img,
+                            widget.img,
                             ParamType.String,
                           ),
                         }.withoutNulls,

@@ -6,8 +6,6 @@ import '/componentes/pro/pro_widget.dart';
 import '/componentes/seja_premiun/seja_premiun_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
 import 'dart:math' as math;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -1011,8 +1009,8 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                               children: [
                                                 Expanded(
                                                   child: Container(
-                                                    width: 80.0,
-                                                    height: 93.0,
+                                                    width: 84.0,
+                                                    height: 82.0,
                                                     decoration: BoxDecoration(
                                                       color: FlutterFlowTheme
                                                               .of(context)
@@ -1029,7 +1027,12 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                     ),
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsets.all(10.0),
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  6.0,
+                                                                  8.0,
+                                                                  6.0,
+                                                                  8.0),
                                                       child: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
@@ -1054,7 +1057,7 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                                           context)
                                                                       .hintTextField,
                                                                   fontSize:
-                                                                      23.0,
+                                                                      24.0,
                                                                   letterSpacing:
                                                                       0.0,
                                                                   fontWeight:
@@ -1087,7 +1090,8 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .hintTextField,
-                                                                  fontSize: 8.0,
+                                                                  fontSize:
+                                                                      12.0,
                                                                   letterSpacing:
                                                                       0.0,
                                                                   fontWeight:
@@ -1097,18 +1101,20 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                                           context)
                                                                       .bodyMedium
                                                                       .fontStyle,
+                                                                  lineHeight:
+                                                                      1.0,
                                                                 ),
                                                           ),
                                                         ].divide(SizedBox(
-                                                            height: 10.0)),
+                                                            height: 4.0)),
                                                       ),
                                                     ),
                                                   ),
                                                 ),
                                                 Expanded(
                                                   child: Container(
-                                                    width: 80.0,
-                                                    height: 93.0,
+                                                    width: 84.0,
+                                                    height: 82.0,
                                                     decoration: BoxDecoration(
                                                       color: FlutterFlowTheme
                                                               .of(context)
@@ -1125,7 +1131,12 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                     ),
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsets.all(10.0),
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  6.0,
+                                                                  8.0,
+                                                                  6.0,
+                                                                  8.0),
                                                       child: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
@@ -1149,7 +1160,7 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                                   color: Color(
                                                                       0xFF1F4499),
                                                                   fontSize:
-                                                                      23.0,
+                                                                      24.0,
                                                                   letterSpacing:
                                                                       0.0,
                                                                   fontWeight:
@@ -1182,7 +1193,8 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .hintTextField,
-                                                                  fontSize: 8.0,
+                                                                  fontSize:
+                                                                      12.0,
                                                                   letterSpacing:
                                                                       0.0,
                                                                   fontWeight:
@@ -1192,18 +1204,20 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                                           context)
                                                                       .bodyMedium
                                                                       .fontStyle,
+                                                                  lineHeight:
+                                                                      1.0,
                                                                 ),
                                                           ),
                                                         ].divide(SizedBox(
-                                                            height: 10.0)),
+                                                            height: 4.0)),
                                                       ),
                                                     ),
                                                   ),
                                                 ),
                                                 Expanded(
                                                   child: Container(
-                                                    width: 85.0,
-                                                    height: 93.0,
+                                                    width: 84.0,
+                                                    height: 82.0,
                                                     decoration: BoxDecoration(
                                                       color: FlutterFlowTheme
                                                               .of(context)
@@ -1220,7 +1234,12 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                     ),
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsets.all(10.0),
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  8.0,
+                                                                  0.0,
+                                                                  8.0),
                                                       child: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
@@ -1245,7 +1264,7 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                                           context)
                                                                       .primaryText,
                                                                   fontSize:
-                                                                      23.0,
+                                                                      24.0,
                                                                   letterSpacing:
                                                                       0.0,
                                                                   fontWeight:
@@ -1278,7 +1297,8 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .hintTextField,
-                                                                  fontSize: 8.0,
+                                                                  fontSize:
+                                                                      12.0,
                                                                   letterSpacing:
                                                                       0.0,
                                                                   fontWeight:
@@ -1288,18 +1308,20 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                                           context)
                                                                       .bodyMedium
                                                                       .fontStyle,
+                                                                  lineHeight:
+                                                                      1.0,
                                                                 ),
                                                           ),
                                                         ].divide(SizedBox(
-                                                            height: 10.0)),
+                                                            height: 4.0)),
                                                       ),
                                                     ),
                                                   ),
                                                 ),
                                                 Expanded(
                                                   child: Container(
-                                                    width: 85.0,
-                                                    height: 93.0,
+                                                    width: 84.0,
+                                                    height: 82.0,
                                                     decoration: BoxDecoration(
                                                       color: FlutterFlowTheme
                                                               .of(context)
@@ -1316,7 +1338,12 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                     ),
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsets.all(10.0),
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  6.0,
+                                                                  8.0,
+                                                                  6.0,
+                                                                  8.0),
                                                       child: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
@@ -1341,7 +1368,7 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                                           context)
                                                                       .primaryText,
                                                                   fontSize:
-                                                                      23.0,
+                                                                      24.0,
                                                                   letterSpacing:
                                                                       0.0,
                                                                   fontWeight:
@@ -1374,7 +1401,8 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .hintTextField,
-                                                                  fontSize: 8.0,
+                                                                  fontSize:
+                                                                      12.0,
                                                                   letterSpacing:
                                                                       0.0,
                                                                   fontWeight:
@@ -1384,10 +1412,12 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                                           context)
                                                                       .bodyMedium
                                                                       .fontStyle,
+                                                                  lineHeight:
+                                                                      1.0,
                                                                 ),
                                                           ),
                                                         ].divide(SizedBox(
-                                                            height: 10.0)),
+                                                            height: 4.0)),
                                                       ),
                                                     ),
                                                   ),
@@ -1604,7 +1634,7 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .secondaryText,
                                                                         fontSize:
-                                                                            10.0,
+                                                                            11.0,
                                                                         letterSpacing:
                                                                             0.0,
                                                                         fontWeight:
@@ -1725,7 +1755,7 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .secondaryText,
                                                                         fontSize:
-                                                                            10.0,
+                                                                            11.0,
                                                                         letterSpacing:
                                                                             0.0,
                                                                         fontWeight:
@@ -1977,7 +2007,7 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                                             color:
                                                                                 FlutterFlowTheme.of(context).secondaryText,
                                                                             fontSize:
-                                                                                10.0,
+                                                                                11.0,
                                                                             letterSpacing:
                                                                                 0.0,
                                                                             fontWeight:
@@ -2132,7 +2162,7 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                                             color:
                                                                                 FlutterFlowTheme.of(context).secondaryText,
                                                                             fontSize:
-                                                                                10.0,
+                                                                                11.0,
                                                                             letterSpacing:
                                                                                 0.0,
                                                                             fontWeight:
@@ -2522,7 +2552,7 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .secondaryText,
                                                                         fontSize:
-                                                                            10.0,
+                                                                            11.0,
                                                                         letterSpacing:
                                                                             0.0,
                                                                         fontWeight:
@@ -2635,7 +2665,7 @@ class _HomePainelGeralWidgetState extends State<HomePainelGeralWidget>
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .secondaryText,
                                                                         fontSize:
-                                                                            10.0,
+                                                                            11.0,
                                                                         letterSpacing:
                                                                             0.0,
                                                                         fontWeight:

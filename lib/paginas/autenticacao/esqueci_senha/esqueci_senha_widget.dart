@@ -2,13 +2,10 @@ import '/auth/supabase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/index.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'esqueci_senha_model.dart';
 export 'esqueci_senha_model.dart';
 
@@ -38,7 +35,7 @@ class _EsqueciSenhaWidgetState extends State<EsqueciSenhaWidget> {
     _model = createModel(context, () => EsqueciSenhaModel());
 
     _model.emailFiedTextController ??=
-        TextEditingController(text: widget!.email);
+        TextEditingController(text: widget.email);
     _model.emailFiedFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -65,50 +62,49 @@ class _EsqueciSenhaWidgetState extends State<EsqueciSenhaWidget> {
           decoration: BoxDecoration(),
           child: Align(
             alignment: AlignmentDirectional(0.0, -1.0),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Align(
-                    alignment: AlignmentDirectional(0.0, -1.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(0.0),
-                      child: Image.asset(
-                        'assets/images/cidade_unida_grande_profissional.png',
-                        width: MediaQuery.sizeOf(context).width * 1.0,
-                        height: 159.0,
-                        fit: BoxFit.cover,
-                      ),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Align(
+                  alignment: AlignmentDirectional(0.0, -1.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(0.0),
+                    child: Image.asset(
+                      'assets/images/cidade_unida_grande_profissional.png',
+                      width: MediaQuery.sizeOf(context).width * 1.0,
+                      height: 159.0,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  Flexible(
-                    child: Container(
-                      width: double.infinity,
-                      height: MediaQuery.sizeOf(context).height * 1.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primary,
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            height: MediaQuery.sizeOf(context).width >= 768.0
-                                ? 530.0
-                                : 630.0,
-                            constraints: BoxConstraints(
-                              maxWidth: 570.0,
-                            ),
-                            decoration: BoxDecoration(
+                ),
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primary,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          height: MediaQuery.sizeOf(context).width >= 768.0
+                              ? 530.0
+                              : 630.0,
+                          constraints: BoxConstraints(
+                            maxWidth: 570.0,
+                          ),
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).primary,
+                            border: Border.all(
                               color: FlutterFlowTheme.of(context).primary,
-                              border: Border.all(
-                                color: FlutterFlowTheme.of(context).primary,
-                                width: 0.0,
-                              ),
+                              width: 0.0,
                             ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  24.0, 67.0, 24.0, 0.0),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                24.0, 67.0, 24.0, 0.0),
+                            child: SingleChildScrollView(
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
@@ -593,12 +589,12 @@ class _EsqueciSenhaWidgetState extends State<EsqueciSenhaWidget> {
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

@@ -4,15 +4,12 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
-import 'dart:ui';
 import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:provider/provider.dart';
 import 'perfil_model.dart';
 export 'perfil_model.dart';
 
@@ -43,11 +40,11 @@ class _PerfilWidgetState extends State<PerfilWidget> {
 
     _model.nomeTextController ??= TextEditingController(
         text:
-            '${widget!.userProfissional?.nome} ${widget!.userProfissional?.sobrenome}');
+            '${widget.userProfissional?.nome} ${widget.userProfissional?.sobrenome}');
     _model.nomeFocusNode ??= FocusNode();
 
     _model.telefoneTextController ??=
-        TextEditingController(text: widget!.userProfissional?.phone);
+        TextEditingController(text: widget.userProfissional?.phone);
     _model.telefoneFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -220,8 +217,6 @@ class _PerfilWidgetState extends State<PerfilWidget> {
                                     child: Builder(
                                       builder: (context) {
                                         if (_model.uploadedFileUrl_uploadData0w88 !=
-                                                null &&
-                                            _model.uploadedFileUrl_uploadData0w88 !=
                                                 '') {
                                           return Container(
                                             width: 100.0,
@@ -257,7 +252,7 @@ class _PerfilWidgetState extends State<PerfilWidget> {
                                                 fit: BoxFit.cover,
                                                 image:
                                                     CachedNetworkImageProvider(
-                                                  widget!
+                                                  widget
                                                       .userProfissional!.foto!,
                                                 ),
                                               ),
@@ -649,8 +644,6 @@ class _PerfilWidgetState extends State<PerfilWidget> {
                                     _model.nomeTextController.text,
                                   );
                                   if (_model.uploadedFileUrl_uploadData0w88 !=
-                                          null &&
-                                      _model.uploadedFileUrl_uploadData0w88 !=
                                           '') {
                                     await UserProfissionaisTable().update(
                                       data: {

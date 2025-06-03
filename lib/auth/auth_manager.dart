@@ -20,7 +20,7 @@ mixin EmailSignInManager on AuthManager {
 
   Future<BaseAuthUser?> createAccountWithEmail(
     BuildContext context,
-    String emails,
+    String email,
     String password,
   );
 }

@@ -1,10 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:ui';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'atividade_secundaria_model.dart';
 export 'atividade_secundaria_model.dart';
 
@@ -69,7 +66,7 @@ class _AtividadeSecundariaWidgetState extends State<AtividadeSecundariaWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                   child: Text(
                     valueOrDefault<String>(
-                      widget!.texto,
+                      widget.texto,
                       'Atividade Secundaria',
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(

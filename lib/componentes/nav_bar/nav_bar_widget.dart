@@ -1,10 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'nav_bar_model.dart';
 export 'nav_bar_model.dart';
 
@@ -103,7 +101,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                       children: [
                         Icon(
                           FFIcons.kvectorStrokesToFills,
-                          color: widget!.navegar == 1
+                          color: widget.navegar == 1
                               ? FlutterFlowTheme.of(context).primaryText
                               : Color(0xFFD9D9D9),
                           size: 22.0,
@@ -119,7 +117,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                       .bodyMedium
                                       .fontStyle,
                                 ),
-                                color: widget!.navegar == 1
+                                color: widget.navegar == 1
                                     ? FlutterFlowTheme.of(context).primaryText
                                     : Color(0xFFD9D9D9),
                                 fontSize: 13.0,
@@ -158,7 +156,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                       children: [
                         Icon(
                           Icons.star_border_rounded,
-                          color: widget!.navegar == 2
+                          color: widget.navegar == 2
                               ? FlutterFlowTheme.of(context).primaryText
                               : Color(0xFFD9D9D9),
                           size: 28.0,
@@ -174,7 +172,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                       .bodyMedium
                                       .fontStyle,
                                 ),
-                                color: widget!.navegar == 2
+                                color: widget.navegar == 2
                                     ? FlutterFlowTheme.of(context).primaryText
                                     : Color(0xFFD9D9D9),
                                 fontSize: 13.0,
@@ -213,7 +211,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                       children: [
                         Icon(
                           FFIcons.kdocument,
-                          color: widget!.navegar == 3
+                          color: widget.navegar == 3
                               ? FlutterFlowTheme.of(context).primaryText
                               : Color(0xFFD9D9D9),
                           size: 23.0,
@@ -229,7 +227,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                       .bodyMedium
                                       .fontStyle,
                                 ),
-                                color: widget!.navegar == 3
+                                color: widget.navegar == 3
                                     ? FlutterFlowTheme.of(context).primaryText
                                     : Color(0xFFD9D9D9),
                                 fontSize: 13.0,

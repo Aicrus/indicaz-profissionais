@@ -1,13 +1,9 @@
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:math';
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'erro_model.dart';
 export 'erro_model.dart';
 
@@ -113,7 +109,7 @@ class _ErroWidgetState extends State<ErroWidget> with TickerProviderStateMixin {
                   children: [
                     Text(
                       valueOrDefault<String>(
-                        widget!.title,
+                        widget.title,
                         '-',
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -133,7 +129,7 @@ class _ErroWidgetState extends State<ErroWidget> with TickerProviderStateMixin {
                     ),
                     Text(
                       valueOrDefault<String>(
-                        widget!.description,
+                        widget.description,
                         '-',
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(

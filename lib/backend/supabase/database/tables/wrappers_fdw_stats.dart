@@ -33,8 +33,8 @@ class WrappersFdwStatsRow extends SupabaseDataRow {
   int? get bytesOut => getField<int>('bytes_out');
   set bytesOut(int? value) => setField<int>('bytes_out', value);
 
-  dynamic? get metadata => getField<dynamic>('metadata');
-  set metadata(dynamic? value) => setField<dynamic>('metadata', value);
+  dynamic get metadata => getField<dynamic>('metadata');
+  set metadata(dynamic value) => setField<dynamic>('metadata', value);
 
   DateTime get createdAt => getField<DateTime>('created_at')!;
   set createdAt(DateTime value) => setField<DateTime>('created_at', value);

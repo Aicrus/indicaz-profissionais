@@ -1,26 +1,9 @@
-import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
-import '/componentes/confirma_empresa/confirma_empresa_widget.dart';
-import '/componentes/endereco/endereco_widget.dart';
-import '/componentes/nome_naopermitido/nome_naopermitido_widget.dart';
-import '/flutter_flow/flutter_flow_drop_down.dart';
-import '/flutter_flow/flutter_flow_place_picker.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/flutter_flow/place.dart';
-import '/flutter_flow/upload_data.dart';
-import 'dart:io';
-import 'dart:ui';
-import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'dados_empresa_widget.dart' show DadosEmpresaWidget;
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class DadosEmpresaModel extends FlutterFlowModel<DadosEmpresaWidget> {
   ///  Local state fields for this page.
@@ -78,6 +61,8 @@ class DadosEmpresaModel extends FlutterFlowModel<DadosEmpresaWidget> {
   FFPlace placePickerValue = FFPlace();
   // Stores action output result for [Backend Call - Query Rows] action in ButtonLogin widget.
   List<ProhibitedWordsRow>? verif;
+  // Stores action output result for [Backend Call - Update Row(s)] action in ButtonLogin widget.
+  List<CompanyRow>? idComapany2;
   // Stores action output result for [Backend Call - Insert Row] action in ButtonLogin widget.
   CompanyRow? idCompany;
 

@@ -1,9 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'endereco_model.dart';
 export 'endereco_model.dart';
 
@@ -48,6 +46,7 @@ class _EnderecoWidgetState extends State<EnderecoWidget> {
         children: [
           Container(
             width: 385.0,
+            height: 500.0,
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).info,
               borderRadius: BorderRadius.circular(10.0),

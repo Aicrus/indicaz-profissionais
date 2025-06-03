@@ -6,7 +6,6 @@ import '/componentes/atividade_nao_permitida/atividade_nao_permitida_widget.dart
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -101,16 +100,16 @@ class _CadastrarAtividadeWidgetState extends State<CadastrarAtividadeWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        if (widget!.perfilEmpresa) {
+                        if (widget.perfilEmpresa) {
                           context.pushNamed(
                             PerfilEmpresaWidget.routeName,
                             queryParameters: {
                               'company': serializeParam(
-                                widget!.company,
+                                widget.company,
                                 ParamType.SupabaseRow,
                               ),
                               'atividade': serializeParam(
-                                widget!.atividade,
+                                widget.atividade,
                                 ParamType.SupabaseRow,
                               ),
                               'categoria': serializeParam(
@@ -131,35 +130,35 @@ class _CadastrarAtividadeWidgetState extends State<CadastrarAtividadeWidget> {
                             DadosEmpresaWidget.routeName,
                             queryParameters: {
                               'company': serializeParam(
-                                widget!.company,
+                                widget.company,
                                 ParamType.SupabaseRow,
                               ),
                               'criar': serializeParam(
-                                widget!.criar,
+                                widget.criar,
                                 ParamType.bool,
                               ),
                               'phone': serializeParam(
-                                widget!.phone,
+                                widget.phone,
                                 ParamType.String,
                               ),
                               'atividade': serializeParam(
-                                widget!.atividade,
+                                widget.atividade,
                                 ParamType.SupabaseRow,
                               ),
                               'idUser': serializeParam(
-                                widget!.isUser,
+                                widget.isUser,
                                 ParamType.int,
                               ),
                               'endereco': serializeParam(
-                                widget!.endereco,
+                                widget.endereco,
                                 ParamType.String,
                               ),
                               'nomeEmpresa': serializeParam(
-                                widget!.nomeEmpresa,
+                                widget.nomeEmpresa,
                                 ParamType.String,
                               ),
                               'img': serializeParam(
-                                widget!.img,
+                                widget.img,
                                 ParamType.String,
                               ),
                             }.withoutNulls,
@@ -254,8 +253,6 @@ class _CadastrarAtividadeWidgetState extends State<CadastrarAtividadeWidget> {
                                       .cast<String>();
                                   safeSetState(() {});
                                   if (_model.nomeAtividadeTextController.text ==
-                                          null ||
-                                      _model.nomeAtividadeTextController.text ==
                                           '') {
                                     _model.listaNomes = [];
                                     safeSetState(() {});
@@ -287,8 +284,7 @@ class _CadastrarAtividadeWidgetState extends State<CadastrarAtividadeWidget> {
                                           .bodyMedium
                                           .fontStyle,
                                     ),
-                                hintText: FFAppState().nomeTexfield != null &&
-                                        FFAppState().nomeTexfield != ''
+                                hintText: FFAppState().nomeTexfield != ''
                                     ? FFAppState().escolhaAtividadeLista
                                     : FFAppState().escolhaAtividadeLista,
                                 hintStyle: FlutterFlowTheme.of(context)
@@ -387,9 +383,7 @@ class _CadastrarAtividadeWidgetState extends State<CadastrarAtividadeWidget> {
                                   .nomeAtividadeTextControllerValidator
                                   .asValidator(context),
                             ),
-                            if (_model.nomeAtividadeTextController.text !=
-                                    null &&
-                                _model.nomeAtividadeTextController.text != '')
+                            if (_model.nomeAtividadeTextController.text != '')
                               Align(
                                 alignment: AlignmentDirectional(0.94, -0.19),
                                 child: InkWell(
@@ -419,8 +413,7 @@ class _CadastrarAtividadeWidgetState extends State<CadastrarAtividadeWidget> {
                         ),
                       ),
                     ),
-                    if (_model.nomeAtividadeTextController.text != null &&
-                        _model.nomeAtividadeTextController.text != '')
+                    if (_model.nomeAtividadeTextController.text != '')
                       Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
@@ -463,8 +456,6 @@ class _CadastrarAtividadeWidgetState extends State<CadastrarAtividadeWidget> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   if (_model.nomeAtividadeTextController.text !=
-                                          null &&
-                                      _model.nomeAtividadeTextController.text !=
                                           '')
                                     Builder(
                                       builder: (context) {
@@ -521,22 +512,22 @@ class _CadastrarAtividadeWidgetState extends State<CadastrarAtividadeWidget> {
                                                                 .nomeAtividadeTextController
                                                                 .text,
                                                             company:
-                                                                widget!.company,
+                                                                widget.company,
                                                             criar:
-                                                                widget!.criar,
+                                                                widget.criar,
                                                             idUser:
-                                                                widget!.isUser,
+                                                                widget.isUser,
                                                             phone:
-                                                                widget!.phone,
+                                                                widget.phone,
                                                             atividade: _model
                                                                 .listaAtividades
                                                                 ?.firstOrNull,
-                                                            endereco: widget!
+                                                            endereco: widget
                                                                 .endereco,
-                                                            nomeEmpresa: widget!
+                                                            nomeEmpresa: widget
                                                                 .nomeEmpresa,
-                                                            img: widget!.img,
-                                                            perfilEmpresa: widget!
+                                                            img: widget.img,
+                                                            perfilEmpresa: widget
                                                                 .perfilEmpresa,
                                                           ),
                                                         ),
@@ -640,8 +631,6 @@ class _CadastrarAtividadeWidgetState extends State<CadastrarAtividadeWidget> {
                                       },
                                     ),
                                   if (_model.nomeAtividadeTextController.text ==
-                                          null ||
-                                      _model.nomeAtividadeTextController.text ==
                                           '')
                                     FutureBuilder<List<ActivityRow>>(
                                       future: ActivityTable().queryRows(
@@ -719,21 +708,21 @@ class _CadastrarAtividadeWidgetState extends State<CadastrarAtividadeWidget> {
                                                                 .nomeAtividadeTextController
                                                                 .text,
                                                             company:
-                                                                widget!.company,
+                                                                widget.company,
                                                             criar:
-                                                                widget!.criar,
+                                                                widget.criar,
                                                             idUser:
-                                                                widget!.isUser,
+                                                                widget.isUser,
                                                             phone:
-                                                                widget!.phone,
+                                                                widget.phone,
                                                             atividade:
                                                                 listViewActivityRow,
-                                                            endereco: widget!
+                                                            endereco: widget
                                                                 .endereco,
-                                                            nomeEmpresa: widget!
+                                                            nomeEmpresa: widget
                                                                 .nomeEmpresa,
-                                                            img: widget!.img,
-                                                            perfilEmpresa: widget!
+                                                            img: widget.img,
+                                                            perfilEmpresa: widget
                                                                 .perfilEmpresa,
                                                           ),
                                                         ),
@@ -890,16 +879,16 @@ class _CadastrarAtividadeWidgetState extends State<CadastrarAtividadeWidget> {
                                       child: AtividadeExisteWidget(
                                         detalhes: _model
                                             .nomeAtividadeTextController.text,
-                                        company: widget!.company,
-                                        criar: widget!.criar,
-                                        idUser: widget!.isUser,
-                                        phone: widget!.phone,
+                                        company: widget.company,
+                                        criar: widget.criar,
+                                        idUser: widget.isUser,
+                                        phone: widget.phone,
                                         atividade:
                                             _model.listaAtividades?.firstOrNull,
-                                        endereco: widget!.endereco,
-                                        nomeEmpresa: widget!.nomeEmpresa,
-                                        img: widget!.img,
-                                        perfilEmpresa: widget!.perfilEmpresa,
+                                        endereco: widget.endereco,
+                                        nomeEmpresa: widget.nomeEmpresa,
+                                        img: widget.img,
+                                        perfilEmpresa: widget.perfilEmpresa,
                                       ),
                                     ),
                                   );
@@ -978,15 +967,15 @@ class _CadastrarAtividadeWidgetState extends State<CadastrarAtividadeWidget> {
                                             detalhes: _model
                                                 .nomeAtividadeTextController
                                                 .text,
-                                            company: widget!.company,
-                                            criar: widget!.criar,
-                                            idUser: widget!.isUser,
-                                            phone: widget!.phone,
+                                            company: widget.company,
+                                            criar: widget.criar,
+                                            idUser: widget.isUser,
+                                            phone: widget.phone,
                                             atividade:
                                                 _model.atividade?.firstOrNull,
-                                            nomeEmpresa: widget!.nomeEmpresa,
-                                            endereco: widget!.endereco,
-                                            img: widget!.img,
+                                            nomeEmpresa: widget.nomeEmpresa,
+                                            endereco: widget.endereco,
+                                            img: widget.img,
                                           ),
                                         ),
                                       );

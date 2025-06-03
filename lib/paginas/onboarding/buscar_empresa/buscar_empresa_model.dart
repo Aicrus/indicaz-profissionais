@@ -1,19 +1,10 @@
 import '/backend/supabase/supabase.dart';
 import '/componentes/empresa_nao_cadastrada/empresa_nao_cadastrada_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'buscar_empresa_widget.dart' show BuscarEmpresaWidget;
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:provider/provider.dart';
 
 class BuscarEmpresaModel extends FlutterFlowModel<BuscarEmpresaWidget> {
   ///  Local state fields for this page.

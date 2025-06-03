@@ -49,6 +49,8 @@ class PerfilEmpresaModel extends FlutterFlowModel<PerfilEmpresaWidget> {
   FormFieldController<int>? atividadePrincipalValueController;
   // Model for AtividadeSecundaria component.
   late AtividadeSecundariaModel atividadeSecundariaModel1;
+  // Stores action output result for [Backend Call - Query Rows] action in ButtonLogin widget.
+  List<ActivityRow>? atividadeCompany;
   // State field(s) for TextFieldTelefone widget.
   FocusNode? textFieldTelefoneFocusNode1;
   TextEditingController? textFieldTelefoneTextController1;

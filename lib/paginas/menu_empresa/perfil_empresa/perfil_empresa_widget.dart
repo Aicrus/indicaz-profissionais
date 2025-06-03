@@ -2148,6 +2148,16 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                 Expanded(
                                                   child: FFButtonWidget(
                                                     onPressed: () async {
+                                                      _model.atividadeCompany =
+                                                          await ActivityTable()
+                                                              .queryRows(
+                                                        queryFn: (q) =>
+                                                            q.eqOrNull(
+                                                          'id',
+                                                          widget.company
+                                                              ?.mainActivity,
+                                                        ),
+                                                      );
                                                       _model.categorias = 0;
                                                       _model.atividadeEscolhida =
                                                           null;
@@ -2157,6 +2167,21 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                             .atividadePrincipalValueController
                                                             ?.reset();
                                                       });
+                                                      safeSetState(() {
+                                                        _model
+                                                            .atividadePrincipalValueController
+                                                            ?.reset();
+                                                      });
+                                                      safeSetState(() {
+                                                        _model.atividadePrincipalValueController
+                                                                ?.value =
+                                                            _model
+                                                                .atividadeCompany!
+                                                                .firstOrNull!
+                                                                .id;
+                                                      });
+
+                                                      safeSetState(() {});
                                                     },
                                                     text: 'Cancelar',
                                                     options: FFButtonOptions(

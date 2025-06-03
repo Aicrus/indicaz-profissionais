@@ -15,7 +15,7 @@ export 'splash_model.dart';
 class SplashWidget extends StatefulWidget {
   const SplashWidget({super.key});
 
-  static String routeName = 'splash';
+  static String routeName = 'Splash';
   static String routePath = '/splash';
 
   @override

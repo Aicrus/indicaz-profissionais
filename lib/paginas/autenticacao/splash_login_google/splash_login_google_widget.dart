@@ -22,7 +22,7 @@ class SplashLoginGoogleWidget extends StatefulWidget {
 
   final String? provedorAuth;
 
-  static String routeName = 'splashLoginGoogle';
+  static String routeName = 'SplashLoginGoogle';
   static String routePath = '/splashLoginGoogle';
 
   @override

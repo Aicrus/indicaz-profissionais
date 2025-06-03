@@ -243,6 +243,16 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                         decoration: BoxDecoration(
                           color:
                               FlutterFlowTheme.of(context).borderColorPrimary,
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 4.0,
+                              color: Color(0x33000000),
+                              offset: Offset(
+                                0.0,
+                                2.0,
+                              ),
+                            )
+                          ],
                         ),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
@@ -1940,6 +1950,12 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                             true,
                                                             ParamType.bool,
                                                           ),
+                                                          'atividade':
+                                                              serializeParam(
+                                                            widget.atividade,
+                                                            ParamType
+                                                                .SupabaseRow,
+                                                          ),
                                                         }.withoutNulls,
                                                         extra: <String,
                                                             dynamic>{
@@ -1994,7 +2010,7 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                           ),
                                                           TextSpan(
                                                             text:
-                                                                'Cadastre-se aqui.',
+                                                                'Cadastre aqui.',
                                                             style: TextStyle(
                                                               decoration:
                                                                   TextDecoration
@@ -2133,6 +2149,8 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                                                   child: FFButtonWidget(
                                                     onPressed: () async {
                                                       _model.categorias = 0;
+                                                      _model.atividadeEscolhida =
+                                                          null;
                                                       safeSetState(() {});
                                                     },
                                                     text: 'Cancelar',
@@ -2438,6 +2456,16 @@ class _PerfilEmpresaWidgetState extends State<PerfilEmpresaWidget> {
                           decoration: BoxDecoration(
                             color:
                                 FlutterFlowTheme.of(context).borderColorPrimary,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 4.0,
+                                color: Color(0x33000000),
+                                offset: Offset(
+                                  0.0,
+                                  2.0,
+                                ),
+                              )
+                            ],
                           ),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(

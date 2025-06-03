@@ -1802,7 +1802,6 @@ class _PreLancamentoWidgetState extends State<PreLancamentoWidget> {
                                 0.0, 0.0, 0.0, 25.0),
                             child: Container(
                               width: double.infinity,
-                              height: 500.0,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12.0),
                                 border: Border.all(

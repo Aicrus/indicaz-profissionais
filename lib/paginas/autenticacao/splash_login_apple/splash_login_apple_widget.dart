@@ -22,7 +22,7 @@ class SplashLoginAppleWidget extends StatefulWidget {
 
   final String? provadorAuth;
 
-  static String routeName = 'splashLoginApple';
+  static String routeName = 'SplashLoginApple';
   static String routePath = '/splashLoginApple';
 
   @override

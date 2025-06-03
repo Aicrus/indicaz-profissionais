@@ -11,7 +11,7 @@ class SplashModel extends FlutterFlowModel<SplashWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - Query Rows] action in splash widget.
+  // Stores action output result for [Backend Call - Query Rows] action in Splash widget.
   List<UserProfissionaisRow>? user;
 
   @override

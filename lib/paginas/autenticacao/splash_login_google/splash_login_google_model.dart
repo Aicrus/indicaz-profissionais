@@ -11,7 +11,7 @@ class SplashLoginGoogleModel extends FlutterFlowModel<SplashLoginGoogleWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Custom Action - getUser] action in splashLoginGoogle widget.
+  // Stores action output result for [Custom Action - getUser] action in SplashLoginGoogle widget.
   UserInfoStruct? user;
 
   @override

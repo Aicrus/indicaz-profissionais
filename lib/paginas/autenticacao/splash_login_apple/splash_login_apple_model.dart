@@ -11,7 +11,7 @@ class SplashLoginAppleModel extends FlutterFlowModel<SplashLoginAppleWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Custom Action - getUser] action in splashLoginApple widget.
+  // Stores action output result for [Custom Action - getUser] action in SplashLoginApple widget.
   UserInfoStruct? user;
 
   @override

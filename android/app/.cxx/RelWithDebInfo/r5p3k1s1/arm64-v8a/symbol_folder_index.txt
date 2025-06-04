@@ -1,0 +1,1 @@
+/Users/paulomorales/indicaz-profissionais/build/app/intermediates/cxx/RelWithDebInfo/r5p3k1s1/obj/arm64-v8a

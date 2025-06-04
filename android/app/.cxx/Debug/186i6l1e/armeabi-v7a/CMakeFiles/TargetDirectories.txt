@@ -1,0 +1,2 @@
+/Users/paulomorales/indicaz-profissionais/android/app/.cxx/Debug/186i6l1e/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/paulomorales/indicaz-profissionais/android/app/.cxx/Debug/186i6l1e/armeabi-v7a/CMakeFiles/rebuild_cache.dir

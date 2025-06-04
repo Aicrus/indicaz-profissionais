@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "638607595252",
+    "project_id": "indicaz-1734629964764",
+    "storage_bucket": "indicaz-1734629964764.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638607595252:android:3j77giej9j9pc37soee3vcgjvs18vmu8",
+        "android_client_info": {
+          "package_name": "com.mycompany.indicazprofissionais"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "638607595252-3j77giej9j9pc37soee3vcgjvs18vmu8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.indicazprofissionais",
+            "certificate_hash": "8F7834F889601F64800559B02E475417D64C2C3A"
+          }
+        },
+        {
+          "client_id": "638607595252-3654lkvipeb8l75255j36a7ahcbtvvvh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOvHxQj-tY4c6IPZP4LLmZake8rI1MN2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "638607595252-49oiakg6qfjn8n4e7nm0gihk28g7bp9a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+} 
